@@ -7,9 +7,7 @@
 //
 
 #import "ViewTVC.h"
-#import <Parse/Parse.h>
 
-#define NUM_ROWS 6
 #warning The following asssumes the user wants the next day to start at 10:00 UTC :
 #define NEW_DAY 6
 
@@ -31,15 +29,18 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    _num_rows = 0;
     
-    [self getAssignmentDataFromParseServer];
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{    
+    [self getAssignmentDataFromParseServer];
 }
 
 - (void)didReceiveMemoryWarning
@@ -75,10 +76,15 @@
 - (void)getAssignmentDataFromParseServer
 {    
     _assignments = [[NSMutableArray alloc] init];
+    _priorities = [[NSMutableArray alloc] init];
+    _ids = [[NSMutableArray alloc] init];
+    
     _assignmentsTmrw = [[NSMutableArray alloc] init];
+    _prioritiesTmrw = [[NSMutableArray alloc] init];
+    _ids_tmrw = [[NSMutableArray alloc] init];
     
     PFQuery *query = [PFQuery queryWithClassName:@"Assignments"];
-    [query orderByDescending:@"priority"];
+    [query orderByAscending:@"priority"];
     query.cachePolicy = kPFCachePolicyNetworkElseCache;
     //[query whereKey:@"assignment_name" equalTo:@"Test Assignment"];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
@@ -89,13 +95,21 @@
         for (PFObject *object in objects) {
             NSDate *today = [NSDate date];
             BOOL sameDate = [self isSameDayWithToday:today due:object[@"due"]];
-            if (sameDate)
+            if (sameDate){
                 [_assignments addObject:object[@"assignment_name"]];
+                NSString *text = [NSString stringWithFormat:@"%@",object[@"priority"]];
+                [_priorities addObject:text];
+                [_ids addObject:object.objectId];
+            }
             else {
                 NSDate *tmrwDate = [today dateByAddingTimeInterval:60*60*24];
                 BOOL tomorrow = [self isSameDayWithToday:tmrwDate due:object[@"due"]];
-                if (tomorrow)
+                if (tomorrow){
                     [_assignmentsTmrw addObject:object[@"assignment_name"]];
+                    NSString *text = [NSString stringWithFormat:@"%@",object[@"priority"]];
+                    [_prioritiesTmrw addObject:text];
+                    [_ids_tmrw addObject:object.objectId];
+                }
             }
             
             NSLog(@"%hhd", (char)sameDate);
@@ -184,11 +198,14 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
-    if (indexPath.section == 0 && [_assignments count])
+    if (indexPath.section == 0 && [_assignments count]){
+        cell.detailTextLabel.text = [_priorities objectAtIndex:indexPath.row];
         cell.textLabel.text = [_assignments objectAtIndex:indexPath.row];
-    else if (indexPath.section == 1 && [_assignmentsTmrw count])
+    }
+    else if (indexPath.section == 1 && [_assignmentsTmrw count]){
+        cell.detailTextLabel.text = [_prioritiesTmrw objectAtIndex:indexPath.row];
         cell.textLabel.text = [_assignmentsTmrw objectAtIndex:indexPath.row];
-    
+    }
     return cell;
         
 }
@@ -226,7 +243,23 @@
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        
+        int section = indexPath.section;
+        int row = indexPath.row;
+        NSString *objectId;
+        if (section == 0)
+            objectId = _ids[row];
+        else
+            objectId = _ids_tmrw[row];
+        
+        PFQuery *query = [PFQuery queryWithClassName:@"Assignments"];
+        [query getObjectInBackgroundWithId:objectId block:^(PFObject *assignment, NSError *error) {
+            [assignment delete];
+            [self getAssignmentDataFromParseServer];
+            //[tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        }];
+        
+        
     } else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
     }   

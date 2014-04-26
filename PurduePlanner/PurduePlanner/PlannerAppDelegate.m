@@ -7,7 +7,6 @@
 //
 
 #import "PlannerAppDelegate.h"
-#import <Parse/Parse.h>
 
 @implementation PlannerAppDelegate
 

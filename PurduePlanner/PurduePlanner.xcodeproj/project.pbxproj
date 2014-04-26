@@ -24,7 +24,6 @@
 		E5183194190765B600D504D1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E5183193190765B600D504D1 /* main.m */; };
 		E5183198190765B600D504D1 /* PlannerAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E5183197190765B600D504D1 /* PlannerAppDelegate.m */; };
 		E518319B190765B600D504D1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E5183199190765B600D504D1 /* Main.storyboard */; };
-		E518319E190765B600D504D1 /* PlannerFirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E518319D190765B600D504D1 /* PlannerFirstViewController.m */; };
 		E51831A3190765B600D504D1 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E51831A2190765B600D504D1 /* Images.xcassets */; };
 		E51831AA190765B600D504D1 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E51831A9190765B600D504D1 /* XCTest.framework */; };
 		E51831AB190765B600D504D1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5183187190765B600D504D1 /* Foundation.framework */; };
@@ -32,6 +31,7 @@
 		E51831B4190765B600D504D1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E51831B2190765B600D504D1 /* InfoPlist.strings */; };
 		E51831B6190765B600D504D1 /* PurduePlannerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E51831B5190765B600D504D1 /* PurduePlannerTests.m */; };
 		E5A42DE9190886070032932C /* ViewTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E5A42DE8190886070032932C /* ViewTVC.m */; };
+		E5B421B4190B6F9700383045 /* AddAssignmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E5B421B3190B6F9700383045 /* AddAssignmentViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,8 +66,6 @@
 		E5183196190765B600D504D1 /* PlannerAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlannerAppDelegate.h; sourceTree = "<group>"; };
 		E5183197190765B600D504D1 /* PlannerAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlannerAppDelegate.m; sourceTree = "<group>"; };
 		E518319A190765B600D504D1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		E518319C190765B600D504D1 /* PlannerFirstViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlannerFirstViewController.h; sourceTree = "<group>"; };
-		E518319D190765B600D504D1 /* PlannerFirstViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlannerFirstViewController.m; sourceTree = "<group>"; };
 		E51831A2190765B600D504D1 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		E51831A8190765B600D504D1 /* PurduePlannerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PurduePlannerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E51831A9190765B600D504D1 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -76,6 +74,8 @@
 		E51831B5190765B600D504D1 /* PurduePlannerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PurduePlannerTests.m; sourceTree = "<group>"; };
 		E5A42DE7190886070032932C /* ViewTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewTVC.h; sourceTree = "<group>"; };
 		E5A42DE8190886070032932C /* ViewTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewTVC.m; sourceTree = "<group>"; };
+		E5B421B2190B6F9700383045 /* AddAssignmentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddAssignmentViewController.h; sourceTree = "<group>"; };
+		E5B421B3190B6F9700383045 /* AddAssignmentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddAssignmentViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -160,10 +160,10 @@
 				E5183196190765B600D504D1 /* PlannerAppDelegate.h */,
 				E5183197190765B600D504D1 /* PlannerAppDelegate.m */,
 				E5183199190765B600D504D1 /* Main.storyboard */,
-				E518319C190765B600D504D1 /* PlannerFirstViewController.h */,
-				E518319D190765B600D504D1 /* PlannerFirstViewController.m */,
 				E51831A2190765B600D504D1 /* Images.xcassets */,
 				E518318E190765B600D504D1 /* Supporting Files */,
+				E5B421B2190B6F9700383045 /* AddAssignmentViewController.h */,
+				E5B421B3190B6F9700383045 /* AddAssignmentViewController.m */,
 			);
 			path = PurduePlanner;
 			sourceTree = "<group>";
@@ -296,7 +296,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E5A42DE9190886070032932C /* ViewTVC.m in Sources */,
-				E518319E190765B600D504D1 /* PlannerFirstViewController.m in Sources */,
+				E5B421B4190B6F9700383045 /* AddAssignmentViewController.m in Sources */,
 				E5183194190765B600D504D1 /* main.m in Sources */,
 				E5183198190765B600D504D1 /* PlannerAppDelegate.m in Sources */,
 			);
