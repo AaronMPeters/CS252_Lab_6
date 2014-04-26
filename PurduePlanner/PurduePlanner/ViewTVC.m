@@ -32,8 +32,6 @@
 {
     [super viewDidLoad];
     _num_rows = 0;
-    _lock = [[NSConditionLock alloc] initWithCondition:0];
-    _array_ready = NO;
     
     [self getAssignmentDataFromParseServer];
     
@@ -61,12 +59,24 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return 3;
+    switch (section) {
+        case 0:
+            return [_assignments count];
+            break;
+        case 1:
+            return [_assignmentsTmrw count];
+            break;
+        default:
+            return 0;
+            break;
+    }
 }
 
 - (void)getAssignmentDataFromParseServer
 {    
     _assignments = [[NSMutableArray alloc] init];
+    _assignmentsTmrw = [[NSMutableArray alloc] init];
+    
     PFQuery *query = [PFQuery queryWithClassName:@"Assignments"];
     [query orderByDescending:@"priority"];
     query.cachePolicy = kPFCachePolicyNetworkElseCache;
@@ -77,12 +87,18 @@
         NSLog(@"Successfully retrieved %lu scores.", (unsigned long)[objects count]);
         // Do something with the found objects
         for (PFObject *object in objects) {
-            //BOOL sameDate = [self isSameDayWithToday:[NSDate date] due:object.createdAt];
-            BOOL sameDate = [self isSameDayWithToday:object[@"today"] due:object[@"due"]];
+            NSDate *today = [NSDate date];
+            BOOL sameDate = [self isSameDayWithToday:today due:object[@"due"]];
             if (sameDate)
                 [_assignments addObject:object[@"assignment_name"]];
+            else {
+                NSDate *tmrwDate = [today dateByAddingTimeInterval:60*60*24];
+                BOOL tomorrow = [self isSameDayWithToday:tmrwDate due:object[@"due"]];
+                if (tomorrow)
+                    [_assignmentsTmrw addObject:object[@"assignment_name"]];
+            }
             
-            //NSLog(@"%hhd", sameDate);
+            NSLog(@"%hhd", (char)sameDate);
         }
         [self.tableView reloadData];
     } else {
@@ -90,6 +106,27 @@
         NSLog(@"Error: %@ %@", error, [error userInfo]);
     }
     }];
+}
+
+- (BOOL)isLastDayofMonthWithDate:(NSDate*)date
+{
+    NSCalendar* calendar = [NSCalendar currentCalendar];
+    
+    unsigned unitFlags = NSYearCalendarUnit | NSMonthCalendarUnit |  NSDayCalendarUnit | NSHourCalendarUnit;
+    NSDateComponents* comp1 = [calendar components:unitFlags fromDate:date];
+    
+    int month = (int)[comp1 month];
+    int day = (int)[comp1 day];
+    NSLog(@"%d/%d", month, day);
+    
+    if (month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12)
+        return day == 31;
+    else if (month != 2)
+        return day == 30;
+    else
+        return day == 28;
+    
+    return NO;
 }
 
 - (BOOL)isSameDayWithToday:(NSDate*)date1 due:(NSDate*)date2
@@ -108,38 +145,38 @@
         if ([comp1 month] == [comp2 month]) {
             // Dates are in same month:
             if ([comp1 day] == [comp2 day]) {
-                // Dates are in same calendar day, so they must match. Return YES:
-                return YES;
-            } else
-            /* 
-             Dates are not in same calendar day.
-             Next, must check if due date is on the next calender day in the same month.
-             If it is, check to see if due date's hours are before 10:00 UTC.
-                If so, RETURN YES:
-             */
-                return ([comp2 day] - [comp1 day] == 1) && ([comp2 hour] < NEW_DAY);
+                // Dates are in same calendar day, make sure they are both below or above NEW_DAY threshold:
+                return ([comp1 hour] < NEW_DAY && [comp2 hour] < NEW_DAY) || ([comp1 hour] >= NEW_DAY && [comp2 hour] >= NEW_DAY);
+            } else {
+             //Dates are not in same calendar day
+                if ([comp1 day] > [comp2 day])
+                    return [comp1 day] - [comp2 day] == 1 && [comp1 hour] < NEW_DAY && [comp2 hour] >= NEW_DAY;
+                
+                //else return if due date is tomorrow and due date's due time is less than NEW_DAY time and today's date is after NEW_DAY threshold
+                return [comp2 day] - [comp1 day] == 1 && [comp2 hour] < NEW_DAY && [comp1 hour] >= NEW_DAY;
+            }
             
         } else {
             /*
                 Dates are not in the same calendar month.
                 First, check to see if the due month is one month after today's month:
-                If it is, check to see if due date's day is 1:
-                If it is, check to see if due date's hours are before 10:00 UTC.
+                If it is, check to see if due date's day is 1 and date1 is last of month:
+                If it is, check to see if due date's hours are before NEW_DAY threshold and today's hours are after NEW_DAY threshold:
                     If so, RETURN YES:
              */
-            return ([comp2 month] - [comp1 month] == 1) && ([comp2 day] == 1) && ([comp2 hour] < NEW_DAY);
+            return ([comp2 month] - [comp1 month] == 1) && [self isLastDayofMonthWithDate:date1] && [comp2 day] == 1 && [comp2 hour] < NEW_DAY && [comp1 hour] >= NEW_DAY;
         }
     }
     else {
         /*
          Dates are not in the same calendar year.
          First, check to see if the due year is one year after today's year:
-         If it is, check to see if the due month is one month after today's month:
-         If it is, check to see if due date's day is 1:
-         If it is, check to see if due date's hours are before 10:00 UTC.
+         If it is, check to see if the due month is January and today's month is December:
+         If it is, check to see if due date's day is 1 and date1 is last of month:
+         If it is, check to see if due date's hours are before NEW_DAY threshold and today's hours are after NEW_DAY threshold:
             If so, RETURN YES:
          */
-        return ([comp2 year] - [comp1 year] == 1) && ([comp2 month] - [comp1 month] == 1) && ([comp2 day] == 1) && ([comp2 hour] < NEW_DAY);
+        return ([comp2 year] - [comp1 year] == 1) && [comp2 month] == 1 && [comp1 month] == 12 && [self isLastDayofMonthWithDate:date1] && [comp2 day] == 1 && [comp2 hour] < NEW_DAY && [comp1 hour] >= NEW_DAY;
     }
 }
 
@@ -147,8 +184,11 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
-    if ([_assignments count])
-        cell.textLabel.text = [_assignments objectAtIndex:0];
+    if (indexPath.section == 0 && [_assignments count])
+        cell.textLabel.text = [_assignments objectAtIndex:indexPath.row];
+    else if (indexPath.section == 1 && [_assignmentsTmrw count])
+        cell.textLabel.text = [_assignmentsTmrw objectAtIndex:indexPath.row];
+    
     return cell;
         
 }
@@ -171,16 +211,16 @@
 
 
 
-/*
+
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // Return NO if you do not want the specified item to be editable.
     return YES;
 }
-*/
 
-/*
+
+
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -191,23 +231,23 @@
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
     }   
 }
-*/
 
-/*
+
+
 // Override to support rearranging the table view.
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
 {
 }
-*/
 
-/*
+
+
 // Override to support conditional rearranging of the table view.
 - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // Return NO if you do not want the item to be re-orderable.
     return YES;
 }
-*/
+
 
 /*
 #pragma mark - Navigation

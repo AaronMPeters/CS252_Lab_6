@@ -12,7 +12,6 @@
 
 @property (nonatomic) int num_rows;
 @property (strong, nonatomic) NSMutableArray *assignments;
-@property (nonatomic) NSConditionLock *lock;
-@property (nonatomic) BOOL array_ready;
+@property (strong, nonatomic) NSMutableArray *assignmentsTmrw;
 
 @end
