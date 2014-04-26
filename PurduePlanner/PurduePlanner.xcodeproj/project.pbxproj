@@ -7,6 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E51747F919088A4900AD04B3 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E51747F819088A4900AD04B3 /* Parse.framework */; };
+		E51747FB19088C3C00AD04B3 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E51747FA19088C3C00AD04B3 /* AudioToolbox.framework */; };
+		E51747FD19088C4400AD04B3 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E51747FC19088C4400AD04B3 /* CFNetwork.framework */; };
+		E51747FF19088C5000AD04B3 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E51747FE19088C5000AD04B3 /* CoreLocation.framework */; };
+		E517480119088C5E00AD04B3 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E517480019088C5E00AD04B3 /* libz.dylib */; };
+		E517480319088C6900AD04B3 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E517480219088C6900AD04B3 /* MobileCoreServices.framework */; };
+		E517480519088C7300AD04B3 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E517480419088C7300AD04B3 /* QuartzCore.framework */; };
+		E517480719088C7E00AD04B3 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E517480619088C7E00AD04B3 /* Security.framework */; };
+		E517480919088C8800AD04B3 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E517480819088C8800AD04B3 /* StoreKit.framework */; };
+		E517480B19088C9200AD04B3 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E517480A19088C9200AD04B3 /* SystemConfiguration.framework */; };
 		E5183188190765B600D504D1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5183187190765B600D504D1 /* Foundation.framework */; };
 		E518318A190765B600D504D1 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5183189190765B600D504D1 /* CoreGraphics.framework */; };
 		E518318C190765B600D504D1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E518318B190765B600D504D1 /* UIKit.framework */; };
@@ -15,13 +25,13 @@
 		E5183198190765B600D504D1 /* PlannerAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E5183197190765B600D504D1 /* PlannerAppDelegate.m */; };
 		E518319B190765B600D504D1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E5183199190765B600D504D1 /* Main.storyboard */; };
 		E518319E190765B600D504D1 /* PlannerFirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E518319D190765B600D504D1 /* PlannerFirstViewController.m */; };
-		E51831A1190765B600D504D1 /* PlannerSecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E51831A0190765B600D504D1 /* PlannerSecondViewController.m */; };
 		E51831A3190765B600D504D1 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E51831A2190765B600D504D1 /* Images.xcassets */; };
 		E51831AA190765B600D504D1 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E51831A9190765B600D504D1 /* XCTest.framework */; };
 		E51831AB190765B600D504D1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5183187190765B600D504D1 /* Foundation.framework */; };
 		E51831AC190765B600D504D1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E518318B190765B600D504D1 /* UIKit.framework */; };
 		E51831B4190765B600D504D1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E51831B2190765B600D504D1 /* InfoPlist.strings */; };
 		E51831B6190765B600D504D1 /* PurduePlannerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E51831B5190765B600D504D1 /* PurduePlannerTests.m */; };
+		E5A42DE9190886070032932C /* ViewTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E5A42DE8190886070032932C /* ViewTVC.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +45,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E51747F819088A4900AD04B3 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parse.framework; path = ../../../../../../../Development/Frameworks/Parse.framework; sourceTree = "<group>"; };
+		E51747FA19088C3C00AD04B3 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		E51747FC19088C4400AD04B3 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		E51747FE19088C5000AD04B3 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		E517480019088C5E00AD04B3 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		E517480219088C6900AD04B3 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		E517480419088C7300AD04B3 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		E517480619088C7E00AD04B3 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		E517480819088C8800AD04B3 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		E517480A19088C9200AD04B3 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		E5183184190765B600D504D1 /* PurduePlanner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PurduePlanner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E5183187190765B600D504D1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		E5183189190765B600D504D1 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -48,14 +68,14 @@
 		E518319A190765B600D504D1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E518319C190765B600D504D1 /* PlannerFirstViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlannerFirstViewController.h; sourceTree = "<group>"; };
 		E518319D190765B600D504D1 /* PlannerFirstViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlannerFirstViewController.m; sourceTree = "<group>"; };
-		E518319F190765B600D504D1 /* PlannerSecondViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlannerSecondViewController.h; sourceTree = "<group>"; };
-		E51831A0190765B600D504D1 /* PlannerSecondViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlannerSecondViewController.m; sourceTree = "<group>"; };
 		E51831A2190765B600D504D1 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		E51831A8190765B600D504D1 /* PurduePlannerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PurduePlannerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E51831A9190765B600D504D1 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		E51831B1190765B600D504D1 /* PurduePlannerTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "PurduePlannerTests-Info.plist"; sourceTree = "<group>"; };
 		E51831B3190765B600D504D1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		E51831B5190765B600D504D1 /* PurduePlannerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PurduePlannerTests.m; sourceTree = "<group>"; };
+		E5A42DE7190886070032932C /* ViewTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewTVC.h; sourceTree = "<group>"; };
+		E5A42DE8190886070032932C /* ViewTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewTVC.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,8 +83,18 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E517480B19088C9200AD04B3 /* SystemConfiguration.framework in Frameworks */,
+				E517480919088C8800AD04B3 /* StoreKit.framework in Frameworks */,
+				E517480719088C7E00AD04B3 /* Security.framework in Frameworks */,
+				E517480519088C7300AD04B3 /* QuartzCore.framework in Frameworks */,
+				E517480319088C6900AD04B3 /* MobileCoreServices.framework in Frameworks */,
+				E517480119088C5E00AD04B3 /* libz.dylib in Frameworks */,
+				E51747FF19088C5000AD04B3 /* CoreLocation.framework in Frameworks */,
+				E51747FD19088C4400AD04B3 /* CFNetwork.framework in Frameworks */,
+				E51747FB19088C3C00AD04B3 /* AudioToolbox.framework in Frameworks */,
 				E518318A190765B600D504D1 /* CoreGraphics.framework in Frameworks */,
 				E518318C190765B600D504D1 /* UIKit.framework in Frameworks */,
+				E51747F919088A4900AD04B3 /* Parse.framework in Frameworks */,
 				E5183188190765B600D504D1 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -104,6 +134,16 @@
 		E5183186190765B600D504D1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E517480A19088C9200AD04B3 /* SystemConfiguration.framework */,
+				E517480819088C8800AD04B3 /* StoreKit.framework */,
+				E517480619088C7E00AD04B3 /* Security.framework */,
+				E517480419088C7300AD04B3 /* QuartzCore.framework */,
+				E517480219088C6900AD04B3 /* MobileCoreServices.framework */,
+				E517480019088C5E00AD04B3 /* libz.dylib */,
+				E51747FE19088C5000AD04B3 /* CoreLocation.framework */,
+				E51747FC19088C4400AD04B3 /* CFNetwork.framework */,
+				E51747FA19088C3C00AD04B3 /* AudioToolbox.framework */,
+				E51747F819088A4900AD04B3 /* Parse.framework */,
 				E5183187190765B600D504D1 /* Foundation.framework */,
 				E5183189190765B600D504D1 /* CoreGraphics.framework */,
 				E518318B190765B600D504D1 /* UIKit.framework */,
@@ -115,13 +155,13 @@
 		E518318D190765B600D504D1 /* PurduePlanner */ = {
 			isa = PBXGroup;
 			children = (
+				E5A42DE7190886070032932C /* ViewTVC.h */,
+				E5A42DE8190886070032932C /* ViewTVC.m */,
 				E5183196190765B600D504D1 /* PlannerAppDelegate.h */,
 				E5183197190765B600D504D1 /* PlannerAppDelegate.m */,
 				E5183199190765B600D504D1 /* Main.storyboard */,
 				E518319C190765B600D504D1 /* PlannerFirstViewController.h */,
 				E518319D190765B600D504D1 /* PlannerFirstViewController.m */,
-				E518319F190765B600D504D1 /* PlannerSecondViewController.h */,
-				E51831A0190765B600D504D1 /* PlannerSecondViewController.m */,
 				E51831A2190765B600D504D1 /* Images.xcassets */,
 				E518318E190765B600D504D1 /* Supporting Files */,
 			);
@@ -255,10 +295,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E5A42DE9190886070032932C /* ViewTVC.m in Sources */,
 				E518319E190765B600D504D1 /* PlannerFirstViewController.m in Sources */,
 				E5183194190765B600D504D1 /* main.m in Sources */,
 				E5183198190765B600D504D1 /* PlannerAppDelegate.m in Sources */,
-				E51831A1190765B600D504D1 /* PlannerSecondViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -383,6 +423,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/SIGAPP/Development/Frameworks,
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PurduePlanner/PurduePlanner-Prefix.pch";
 				INFOPLIST_FILE = "PurduePlanner/PurduePlanner-Info.plist";
@@ -396,6 +440,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/SIGAPP/Development/Frameworks,
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PurduePlanner/PurduePlanner-Prefix.pch";
 				INFOPLIST_FILE = "PurduePlanner/PurduePlanner-Info.plist";
@@ -463,6 +511,7 @@
 				E51831BB190765B600D504D1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		E51831BC190765B600D504D1 /* Build configuration list for PBXNativeTarget "PurduePlannerTests" */ = {
 			isa = XCConfigurationList;
@@ -471,6 +520,7 @@
 				E51831BE190765B600D504D1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

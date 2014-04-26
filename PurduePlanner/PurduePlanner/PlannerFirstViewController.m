@@ -7,6 +7,7 @@
 //
 
 #import "PlannerFirstViewController.h"
+#import <Parse/Parse.h>
 
 @interface PlannerFirstViewController ()
 
@@ -17,6 +18,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self addAssignment];
 	// Do any additional setup after loading the view, typically from a nib.
 }
 
@@ -25,5 +27,20 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+-(void)addAssignment
+{
+    PFObject *gameScore = [PFObject objectWithClassName:@"GameScore"];
+    gameScore[@"score"] = @1337;
+    gameScore[@"playerName"] = @"Sean Plott";
+    gameScore[@"cheatMode"] = @NO;
+    [gameScore saveInBackground];
+    
+    
+    PFObject *testObject = [PFObject objectWithClassName:@"TestObject"];
+    testObject[@"foo"] = @"bar";
+    [testObject saveInBackground];
+}
+
 
 @end

@@ -7,13 +7,19 @@
 //
 
 #import "PlannerAppDelegate.h"
+#import <Parse/Parse.h>
 
 @implementation PlannerAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    
+    [Parse setApplicationId:@"DZ7ZKni9f8RSIZTAKoq6UIWZ8KsRWORv0vzeVwE3"
+                  clientKey:@"tTbdacjcOPIj8iDOQLK5MdAZmNhnkHjRX3vkJVhU"];
+    [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
     // Override point for customization after application launch.
     return YES;
+    
 }
 							
 - (void)applicationWillResignActive:(UIApplication *)application
