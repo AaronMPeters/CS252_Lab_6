@@ -32,6 +32,8 @@
 		E51831B6190765B600D504D1 /* PurduePlannerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E51831B5190765B600D504D1 /* PurduePlannerTests.m */; };
 		E5A42DE9190886070032932C /* ViewTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E5A42DE8190886070032932C /* ViewTVC.m */; };
 		E5B421B4190B6F9700383045 /* AddAssignmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E5B421B3190B6F9700383045 /* AddAssignmentViewController.m */; };
+		E5B421B7190C51E600383045 /* MonthCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E5B421B6190C51E600383045 /* MonthCollectionViewController.m */; };
+		E5B421BD190C79C300383045 /* WeekViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E5B421BC190C79C300383045 /* WeekViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,6 +78,10 @@
 		E5A42DE8190886070032932C /* ViewTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewTVC.m; sourceTree = "<group>"; };
 		E5B421B2190B6F9700383045 /* AddAssignmentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddAssignmentViewController.h; sourceTree = "<group>"; };
 		E5B421B3190B6F9700383045 /* AddAssignmentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddAssignmentViewController.m; sourceTree = "<group>"; };
+		E5B421B5190C51E600383045 /* MonthCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MonthCollectionViewController.h; sourceTree = "<group>"; };
+		E5B421B6190C51E600383045 /* MonthCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MonthCollectionViewController.m; sourceTree = "<group>"; };
+		E5B421BB190C79C300383045 /* WeekViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeekViewController.h; sourceTree = "<group>"; };
+		E5B421BC190C79C300383045 /* WeekViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeekViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -160,6 +166,10 @@
 				E5183196190765B600D504D1 /* PlannerAppDelegate.h */,
 				E5183197190765B600D504D1 /* PlannerAppDelegate.m */,
 				E5183199190765B600D504D1 /* Main.storyboard */,
+				E5B421BB190C79C300383045 /* WeekViewController.h */,
+				E5B421BC190C79C300383045 /* WeekViewController.m */,
+				E5B421B5190C51E600383045 /* MonthCollectionViewController.h */,
+				E5B421B6190C51E600383045 /* MonthCollectionViewController.m */,
 				E51831A2190765B600D504D1 /* Images.xcassets */,
 				E518318E190765B600D504D1 /* Supporting Files */,
 				E5B421B2190B6F9700383045 /* AddAssignmentViewController.h */,
@@ -295,7 +305,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E5B421B7190C51E600383045 /* MonthCollectionViewController.m in Sources */,
 				E5A42DE9190886070032932C /* ViewTVC.m in Sources */,
+				E5B421BD190C79C300383045 /* WeekViewController.m in Sources */,
 				E5B421B4190B6F9700383045 /* AddAssignmentViewController.m in Sources */,
 				E5183194190765B600D504D1 /* main.m in Sources */,
 				E5183198190765B600D504D1 /* PlannerAppDelegate.m in Sources */,
