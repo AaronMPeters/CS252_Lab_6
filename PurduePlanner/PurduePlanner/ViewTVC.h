@@ -12,11 +12,11 @@
 @interface ViewTVC : UITableViewController
 
 @property (strong, nonatomic) NSMutableArray *assignments;
-@property (strong, nonatomic) NSMutableArray *priorities;
+@property (strong, nonatomic) NSMutableArray *times;
 @property (strong, nonatomic) NSMutableArray *ids;
 
 @property (strong, nonatomic) NSMutableArray *assignmentsTmrw;
-@property (strong, nonatomic) NSMutableArray *prioritiesTmrw;
+@property (strong, nonatomic) NSMutableArray *timesTmrw;
 @property (strong, nonatomic) NSMutableArray *ids_tmrw;
 
 @end

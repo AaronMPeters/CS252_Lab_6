@@ -49,7 +49,7 @@
 
 - (IBAction)addAssignmentClick:(id)sender
 {
-    int len = [[_assignmentDescriptionTextField text] length];
+    int len = (int)[[_assignmentDescriptionTextField text] length];
     if (len == 0) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Hang on..."
                                                         message:@"Please don't enter a blank assignment!"

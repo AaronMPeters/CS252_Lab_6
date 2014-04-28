@@ -76,15 +76,15 @@
 - (void)getAssignmentDataFromParseServer
 {    
     _assignments = [[NSMutableArray alloc] init];
-    _priorities = [[NSMutableArray alloc] init];
+    _times = [[NSMutableArray alloc] init];
     _ids = [[NSMutableArray alloc] init];
     
     _assignmentsTmrw = [[NSMutableArray alloc] init];
-    _prioritiesTmrw = [[NSMutableArray alloc] init];
+    _timesTmrw = [[NSMutableArray alloc] init];
     _ids_tmrw = [[NSMutableArray alloc] init];
     
     PFQuery *query = [PFQuery queryWithClassName:@"Assignments"];
-    [query orderByAscending:@"priority"];
+    [query orderByAscending:@"due"];
     query.cachePolicy = kPFCachePolicyNetworkElseCache;
     //[query whereKey:@"assignment_name" equalTo:@"Test Assignment"];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
@@ -97,8 +97,8 @@
             BOOL sameDate = [self isSameDayWithToday:today due:object[@"due"]];
             if (sameDate){
                 [_assignments addObject:object[@"assignment_name"]];
-                NSString *text = [NSString stringWithFormat:@"%@",object[@"priority"]];
-                [_priorities addObject:text];
+                //NSString *text = [NSString stringWithFormat:@"%@",object[@"priority"]];
+                [_times addObject:[self getTimeRepresentationWithDate:object[@"due"]]];
                 [_ids addObject:object.objectId];
             }
             else {
@@ -106,8 +106,8 @@
                 BOOL tomorrow = [self isSameDayWithToday:tmrwDate due:object[@"due"]];
                 if (tomorrow){
                     [_assignmentsTmrw addObject:object[@"assignment_name"]];
-                    NSString *text = [NSString stringWithFormat:@"%@",object[@"priority"]];
-                    [_prioritiesTmrw addObject:text];
+                    //NSString *text = [NSString stringWithFormat:@"%@",object[@"priority"]];
+                    [_timesTmrw addObject:[self getTimeRepresentationWithDate:object[@"due"]]];
                     [_ids_tmrw addObject:object.objectId];
                 }
             }
@@ -120,6 +120,27 @@
         NSLog(@"Error: %@ %@", error, [error userInfo]);
     }
     }];
+}
+
+- (NSString *)getTimeRepresentationWithDate:(NSDate *)date
+{
+    NSDateFormatter *format = [[NSDateFormatter alloc] init];
+    [format setDateFormat:@"hh:mm a"];
+    
+    
+    NSString *dateString = [format stringFromDate:date];
+    return dateString;
+    
+    
+    NSCalendar* calendar = [NSCalendar currentCalendar];
+    
+    unsigned unitFlags = NSYearCalendarUnit | NSMonthCalendarUnit |  NSDayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit;
+    NSDateComponents* comp1 = [calendar components:unitFlags fromDate:date];
+    
+    int hour = (int)[comp1 hour];
+    int minute = (int)[comp1 minute];
+    NSString *time = [[NSString alloc] initWithFormat:@"%d:%d", hour, minute];
+    return time;
 }
 
 - (BOOL)isLastDayofMonthWithDate:(NSDate*)date
@@ -199,11 +220,11 @@
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
     if (indexPath.section == 0 && [_assignments count]){
-        cell.detailTextLabel.text = [_priorities objectAtIndex:indexPath.row];
+        cell.detailTextLabel.text = [_times objectAtIndex:indexPath.row];
         cell.textLabel.text = [_assignments objectAtIndex:indexPath.row];
     }
     else if (indexPath.section == 1 && [_assignmentsTmrw count]){
-        cell.detailTextLabel.text = [_prioritiesTmrw objectAtIndex:indexPath.row];
+        cell.detailTextLabel.text = [_timesTmrw objectAtIndex:indexPath.row];
         cell.textLabel.text = [_assignmentsTmrw objectAtIndex:indexPath.row];
     }
     return cell;
@@ -231,7 +252,7 @@
 {
     UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
     if (cell.accessoryType == UITableViewCellAccessoryCheckmark)
-        cell.accessoryType = UITableViewCellAccessoryNone;
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     else
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
 }
@@ -251,8 +272,8 @@
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete the row from the data source
         
-        int section = indexPath.section;
-        int row = indexPath.row;
+        int section = (int)indexPath.section;
+        int row = (int)indexPath.row;
         NSString *objectId;
         if (section == 0)
             objectId = _ids[row];

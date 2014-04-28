@@ -30,16 +30,16 @@
     [super viewDidLoad];
     
     array = [[NSMutableArray alloc] init];
-    [array addObject:@"M"];
-    [array addObject:@"T"];
-    [array addObject:@"W"];
-    [array addObject:@"R"];
-    [array addObject:@"F"];
-    [array addObject:@"M"];
-    [array addObject:@"T"];
-    [array addObject:@"W"];
-    [array addObject:@"R"];
-    [array addObject:@"F"];
+    [array addObject:@"28"];
+    [array addObject:@"29"];
+    [array addObject:@"30"];
+    [array addObject:@"May"];
+    [array addObject:@"2"];
+    [array addObject:@"5"];
+    [array addObject:@"6"];
+    [array addObject:@"7"];
+    [array addObject:@"8"];
+    [array addObject:@"9"];
     
     
     // Do any additional setup after loading the view.
@@ -65,7 +65,7 @@
 #pragma mark Collection View Methods
 -(NSInteger) numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
-    return 1;
+    return 2;
 }
 
 
@@ -84,7 +84,7 @@
     [cell.layer setBorderWidth:2.0f];
     [cell.layer setBorderColor:[UIColor whiteColor].CGColor];
     
-    //[cell.layer setCornerRadius:50.0f];
+    [cell.layer setCornerRadius:10.0f];
     
     return cell;
 }
