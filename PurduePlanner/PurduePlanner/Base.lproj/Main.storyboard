@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="30" translatesAutoresizingMaskIntoConstraints="NO" id="yma-ZL-aT0">
-                                <rect key="frame" x="20" y="142" width="290" height="162"/>
+                                <rect key="frame" x="20" y="185" width="290" height="162"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <date key="date" timeIntervalSinceReferenceDate="419917626.17574197">
                                     <!--2014-04-23 03:47:06 +0000-->
@@ -45,7 +45,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 </timeZone>
                             </datePicker>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4EZ-33-RdT">
-                                <rect key="frame" x="104" y="97" width="113" height="30"/>
+                                <rect key="frame" x="104" y="140" width="113" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Add Assignment">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -55,7 +55,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Describe Assignment" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dqe-pe-RRH">
-                                <rect key="frame" x="20" y="51" width="280" height="30"/>
+                                <rect key="frame" x="20" y="94" width="280" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -66,7 +66,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Add" image="first" id="u1e-5L-l1D"/>
+                    <navigationItem key="navigationItem" title="Add Assignment" id="Bfd-YL-dS1"/>
                     <connections>
                         <outlet property="addAssignmentButton" destination="4EZ-33-RdT" id="c6F-nB-gdd"/>
                         <outlet property="assignmentDescriptionTextField" destination="dqe-pe-RRH" id="9s4-pt-Osl"/>
@@ -75,7 +75,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qh2-T1-AhA" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2312" y="14"/>
+            <point key="canvasLocation" x="2838" y="14"/>
         </scene>
         <!--Week View Controller - Month-->
         <scene sceneID="T2b-TQ-Ws4">
@@ -212,7 +212,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             </objects>
             <point key="canvasLocation" x="1179" y="-540"/>
         </scene>
-        <!--Assignment Detail View Controller - Assignment Details-->
+        <!--Assignment Detail View Controller - Edit Assignment-->
         <scene sceneID="A8r-78-LEY">
             <objects>
                 <viewController id="PAY-bs-vlY" customClass="AssignmentDetailViewController" sceneMemberID="viewController">
@@ -225,7 +225,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Describe Assignment" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DQS-z7-khA">
-                                <rect key="frame" x="20" y="84" width="280" height="30"/>
+                                <rect key="frame" x="20" y="118" width="280" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -233,8 +233,19 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                     <action selector="assignmentDescriptionDidEnd:" destination="CZ4-MO-1fc" eventType="editingDidEndOnExit" id="IFG-s8-0h6"/>
                                 </connections>
                             </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eaX-Ue-uTT">
+                                <rect key="frame" x="20" y="80" width="110" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Finished Editing">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="addAssignmentClick:" destination="CZ4-MO-1fc" eventType="touchUpInside" id="aHq-hI-hFM"/>
+                                    <action selector="editAssignmentButtonDidPress:" destination="PAY-bs-vlY" eventType="touchUpInside" id="Il2-E6-KdF"/>
+                                </connections>
+                            </button>
                             <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="30" translatesAutoresizingMaskIntoConstraints="NO" id="d1b-vX-cpz">
-                                <rect key="frame" x="20" y="203" width="290" height="162"/>
+                                <rect key="frame" x="15" y="203" width="290" height="162"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <date key="date" timeIntervalSinceReferenceDate="419917626.17574197">
                                     <!--2014-04-23 03:47:06 +0000-->
@@ -261,22 +272,11 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
 </mutableData>
                                 </timeZone>
                             </datePicker>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eaX-Ue-uTT">
-                                <rect key="frame" x="104" y="127" width="112" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Edit Assignment">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="addAssignmentClick:" destination="CZ4-MO-1fc" eventType="touchUpInside" id="aHq-hI-hFM"/>
-                                    <action selector="editAssignmentButtonDidPress:" destination="PAY-bs-vlY" eventType="touchUpInside" id="Il2-E6-KdF"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nTF-8f-cBy">
-                                <rect key="frame" x="80" y="474" width="160" height="30"/>
+                                <rect key="frame" x="230" y="77" width="70" height="33"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                                <state key="normal" title="Delete Assignment">
+                                <state key="normal" title="Delete">
                                     <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -285,31 +285,29 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                     <action selector="deleteButtonDidPress:" destination="PAY-bs-vlY" eventType="touchUpInside" id="Xy6-El-m6N"/>
                                 </connections>
                             </button>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ET0-bm-wmz">
-                                <rect key="frame" x="191" y="160" width="51" height="31"/>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="vTY-EY-TdV">
+                                <rect key="frame" x="77" y="161" width="167" height="29"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </switch>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Complete:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aeT-EL-Rb5">
-                                <rect key="frame" x="80" y="165" width="80" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                                <segments>
+                                    <segment title="In Progress"/>
+                                    <segment title="Completed"/>
+                                </segments>
+                            </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Assignment Details" id="o2a-5J-Lg1"/>
+                    <navigationItem key="navigationItem" title="Edit Assignment" id="o2a-5J-Lg1"/>
                     <connections>
                         <outlet property="assignmentDescriptionTextField" destination="DQS-z7-khA" id="50Q-ao-5m4"/>
-                        <outlet property="completeSwitch" destination="ET0-bm-wmz" id="DH0-2g-Ig4"/>
                         <outlet property="datePicker" destination="d1b-vX-cpz" id="gyS-nu-5BS"/>
                         <outlet property="deleteAssignmentButton" destination="nTF-8f-cBy" id="LaY-L7-jQh"/>
                         <outlet property="editAssignmentButton" destination="eaX-Ue-uTT" id="gf3-OG-oKd"/>
+                        <outlet property="progressSegmentedControl" destination="vTY-EY-TdV" id="tJb-8Z-SQ4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rWj-8D-HUA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1665" y="-540"/>
+            <point key="canvasLocation" x="1693" y="-540"/>
         </scene>
         <!--View Controller - Settings-->
         <scene sceneID="IVw-7z-27f">
@@ -351,7 +349,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     </tabBar>
                     <connections>
                         <segue destination="qCG-Lc-v3f" kind="relationship" relationship="viewControllers" id="fpK-mP-JvP"/>
-                        <segue destination="CZ4-MO-1fc" kind="relationship" relationship="viewControllers" id="SUk-Ux-ee1"/>
+                        <segue destination="26k-OB-cjO" kind="relationship" relationship="viewControllers" id="SUk-Ux-ee1"/>
                         <segue destination="Vwf-EW-XZT" kind="relationship" relationship="viewControllers" id="njm-z2-c1T"/>
                         <segue destination="FtZ-j5-R1k" kind="relationship" relationship="viewControllers" id="wnL-v8-tID"/>
                     </connections>
@@ -378,6 +376,25 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hvu-j5-XE7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="653" y="-540"/>
+        </scene>
+        <!--Navigation Controller - Add-->
+        <scene sceneID="NvB-tZ-J6Z">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="26k-OB-cjO" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Add" image="first" id="u1e-5L-l1D"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="l9c-M6-j1M">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="CZ4-MO-1fc" kind="relationship" relationship="rootViewController" id="8A6-c9-KiR"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="MbR-Zh-tgu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2312" y="14"/>
         </scene>
     </scenes>
     <resources>

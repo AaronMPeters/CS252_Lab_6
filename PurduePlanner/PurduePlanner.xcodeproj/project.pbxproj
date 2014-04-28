@@ -174,9 +174,9 @@
 				E5B421B3190B6F9700383045 /* AddAssignmentViewController.m */,
 				E5B421BB190C79C300383045 /* WeekViewController.h */,
 				E5B421BC190C79C300383045 /* WeekViewController.m */,
-				E5183199190765B600D504D1 /* Main.storyboard */,
 				E5B421B5190C51E600383045 /* MonthCollectionViewController.h */,
 				E5B421B6190C51E600383045 /* MonthCollectionViewController.m */,
+				E5183199190765B600D504D1 /* Main.storyboard */,
 				E51831A2190765B600D504D1 /* Images.xcassets */,
 				E518318E190765B600D504D1 /* Supporting Files */,
 			);

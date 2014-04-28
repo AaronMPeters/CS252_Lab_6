@@ -220,10 +220,22 @@
     if (indexPath.section == 0 && [_assignments count]){
         cell.detailTextLabel.text = [_times objectAtIndex:indexPath.row];
         cell.textLabel.text = [_assignments objectAtIndex:indexPath.row];
+        NSNumber *num = [NSNumber numberWithBool:[[_completeStatuses objectAtIndex:indexPath.row] boolValue]];
+        int i = [num intValue];
+        if (i)
+            cell.accessoryType = UITableViewCellAccessoryCheckmark;
+        else
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     else if (indexPath.section == 1 && [_assignmentsTmrw count]){
         cell.detailTextLabel.text = [_timesTmrw objectAtIndex:indexPath.row];
         cell.textLabel.text = [_assignmentsTmrw objectAtIndex:indexPath.row];
+        NSNumber *num = [NSNumber numberWithBool:[[_completeStatusesTmrw objectAtIndex:indexPath.row] boolValue]];
+        int i = [num intValue];
+        if (i)
+            cell.accessoryType = UITableViewCellAccessoryCheckmark;
+        else
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     return cell;
         
@@ -249,10 +261,10 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
-    if (cell.accessoryType == UITableViewCellAccessoryCheckmark)
+    /*if (cell.accessoryType == UITableViewCellAccessoryCheckmark)
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     else
-        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+        cell.accessoryType = UITableViewCellAccessoryCheckmark;*/
 }
 
 // Override to support conditional editing of the table view.
@@ -317,7 +329,10 @@
     NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
     if([segueIdentifier isEqualToString:@"AssignmentSegue"]){
         AssignmentDetailViewController *detailController = (AssignmentDetailViewController *)[segue destinationViewController];
-        detailController.objectId = [_ids objectAtIndex:indexPath.row];
+        if (indexPath.section)
+            detailController.objectId = [_ids_tmrw objectAtIndex:indexPath.row];
+        else
+            detailController.objectId = [_ids objectAtIndex:indexPath.row];
     }
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.

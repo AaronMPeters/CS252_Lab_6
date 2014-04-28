@@ -30,6 +30,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.navigationItem.title = @"Add Assignment";
     // Do any additional setup after loading the view.
 }
 
@@ -82,7 +83,8 @@
     //[assignment saveInBackground];
     [assignment saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (!error) {
-            [self resetUI];
+            //[self resetUI];
+            [self.tabBarController setSelectedIndex:0];
         } else {
             // Log details of the failure
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Oops..."
