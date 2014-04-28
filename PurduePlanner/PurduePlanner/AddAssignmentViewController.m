@@ -9,8 +9,7 @@
 #import "AddAssignmentViewController.h"
 
 @interface AddAssignmentViewController ()
-@property (weak, nonatomic) IBOutlet UIStepper *priorityStepper;
-@property (weak, nonatomic) IBOutlet UILabel *priorityLabel;
+
 @property (weak, nonatomic) IBOutlet UIButton *addAssignmentButton;
 @property (weak, nonatomic) IBOutlet UIDatePicker *datePicker;
 @property (weak, nonatomic) IBOutlet UITextField *assignmentDescriptionTextField;
@@ -31,7 +30,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    _priority = 1;
     // Do any additional setup after loading the view.
 }
 
@@ -39,12 +37,6 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-- (IBAction)priorityStepperValueChanged:(id)sender
-{
-    _priority = [_priorityStepper value];
-    NSString *text = [NSString stringWithFormat:@"%d",_priority];
-    _priorityLabel.text = text;
 }
 
 - (IBAction)addAssignmentClick:(id)sender
@@ -60,6 +52,7 @@
         return;
     }
     
+    [_assignmentDescriptionTextField resignFirstResponder];
     [self addAssignment];
 }
 
@@ -72,10 +65,6 @@
 {
     _assignmentDescriptionTextField.text = @"";
     _datePicker.date = [NSDate date];
-    _priority = 1;
-    _priorityStepper.value = 1;
-    NSString *text = [NSString stringWithFormat:@"%d",_priority];
-    _priorityLabel.text = text;
 }
 
 - (void)addAssignment
@@ -83,9 +72,12 @@
     PFObject *assignment = [PFObject objectWithClassName:@"Assignments"];
     assignment[@"assignment_name"] = [_assignmentDescriptionTextField text];
     assignment[@"due"] = [_datePicker date];
+    assignment[@"complete"] = @NO;
     
-    NSNumber *number = [[NSNumber alloc] initWithInt:_priority];
-    assignment[@"priority"] = number;
+#warning This should be the current user when in production:
+    NSString *objectId = @"F9klQH1aRG";
+    PFUser *user = [PFQuery getUserObjectWithId:objectId];
+    assignment[@"user"] = user;
     
     //[assignment saveInBackground];
     [assignment saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {

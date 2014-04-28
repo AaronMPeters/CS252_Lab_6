@@ -11,6 +11,4 @@
 
 @interface AddAssignmentViewController : UIViewController
 
-@property (nonatomic) int priority;
-
 @end

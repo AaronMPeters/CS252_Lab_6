@@ -30,6 +30,7 @@
 		E51831AC190765B600D504D1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E518318B190765B600D504D1 /* UIKit.framework */; };
 		E51831B4190765B600D504D1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E51831B2190765B600D504D1 /* InfoPlist.strings */; };
 		E51831B6190765B600D504D1 /* PurduePlannerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E51831B5190765B600D504D1 /* PurduePlannerTests.m */; };
+		E528C2EB190DF228006EF3D0 /* AssignmentDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E528C2EA190DF228006EF3D0 /* AssignmentDetailViewController.m */; };
 		E5A42DE9190886070032932C /* ViewTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E5A42DE8190886070032932C /* ViewTVC.m */; };
 		E5B421B4190B6F9700383045 /* AddAssignmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E5B421B3190B6F9700383045 /* AddAssignmentViewController.m */; };
 		E5B421B7190C51E600383045 /* MonthCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E5B421B6190C51E600383045 /* MonthCollectionViewController.m */; };
@@ -74,6 +75,8 @@
 		E51831B1190765B600D504D1 /* PurduePlannerTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "PurduePlannerTests-Info.plist"; sourceTree = "<group>"; };
 		E51831B3190765B600D504D1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		E51831B5190765B600D504D1 /* PurduePlannerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PurduePlannerTests.m; sourceTree = "<group>"; };
+		E528C2E9190DF228006EF3D0 /* AssignmentDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AssignmentDetailViewController.h; sourceTree = "<group>"; };
+		E528C2EA190DF228006EF3D0 /* AssignmentDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AssignmentDetailViewController.m; sourceTree = "<group>"; };
 		E5A42DE7190886070032932C /* ViewTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewTVC.h; sourceTree = "<group>"; };
 		E5A42DE8190886070032932C /* ViewTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewTVC.m; sourceTree = "<group>"; };
 		E5B421B2190B6F9700383045 /* AddAssignmentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddAssignmentViewController.h; sourceTree = "<group>"; };
@@ -161,19 +164,21 @@
 		E518318D190765B600D504D1 /* PurduePlanner */ = {
 			isa = PBXGroup;
 			children = (
-				E5A42DE7190886070032932C /* ViewTVC.h */,
-				E5A42DE8190886070032932C /* ViewTVC.m */,
 				E5183196190765B600D504D1 /* PlannerAppDelegate.h */,
 				E5183197190765B600D504D1 /* PlannerAppDelegate.m */,
-				E5183199190765B600D504D1 /* Main.storyboard */,
+				E5A42DE7190886070032932C /* ViewTVC.h */,
+				E5A42DE8190886070032932C /* ViewTVC.m */,
+				E528C2E9190DF228006EF3D0 /* AssignmentDetailViewController.h */,
+				E528C2EA190DF228006EF3D0 /* AssignmentDetailViewController.m */,
+				E5B421B2190B6F9700383045 /* AddAssignmentViewController.h */,
+				E5B421B3190B6F9700383045 /* AddAssignmentViewController.m */,
 				E5B421BB190C79C300383045 /* WeekViewController.h */,
 				E5B421BC190C79C300383045 /* WeekViewController.m */,
+				E5183199190765B600D504D1 /* Main.storyboard */,
 				E5B421B5190C51E600383045 /* MonthCollectionViewController.h */,
 				E5B421B6190C51E600383045 /* MonthCollectionViewController.m */,
 				E51831A2190765B600D504D1 /* Images.xcassets */,
 				E518318E190765B600D504D1 /* Supporting Files */,
-				E5B421B2190B6F9700383045 /* AddAssignmentViewController.h */,
-				E5B421B3190B6F9700383045 /* AddAssignmentViewController.m */,
 			);
 			path = PurduePlanner;
 			sourceTree = "<group>";
@@ -306,6 +311,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E5B421B7190C51E600383045 /* MonthCollectionViewController.m in Sources */,
+				E528C2EB190DF228006EF3D0 /* AssignmentDetailViewController.m in Sources */,
 				E5A42DE9190886070032932C /* ViewTVC.m in Sources */,
 				E5B421BD190C79C300383045 /* WeekViewController.m in Sources */,
 				E5B421B4190B6F9700383045 /* AddAssignmentViewController.m in Sources */,

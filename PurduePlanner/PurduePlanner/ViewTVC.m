@@ -78,15 +78,16 @@
     _assignments = [[NSMutableArray alloc] init];
     _times = [[NSMutableArray alloc] init];
     _ids = [[NSMutableArray alloc] init];
+    _completeStatuses = [[NSMutableArray alloc] init];
     
     _assignmentsTmrw = [[NSMutableArray alloc] init];
     _timesTmrw = [[NSMutableArray alloc] init];
     _ids_tmrw = [[NSMutableArray alloc] init];
+    _completeStatusesTmrw = [[NSMutableArray alloc] init];
     
     PFQuery *query = [PFQuery queryWithClassName:@"Assignments"];
     [query orderByAscending:@"due"];
     query.cachePolicy = kPFCachePolicyNetworkElseCache;
-    //[query whereKey:@"assignment_name" equalTo:@"Test Assignment"];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
     if (!error) {
         // The find succeeded.
@@ -97,8 +98,8 @@
             BOOL sameDate = [self isSameDayWithToday:today due:object[@"due"]];
             if (sameDate){
                 [_assignments addObject:object[@"assignment_name"]];
-                //NSString *text = [NSString stringWithFormat:@"%@",object[@"priority"]];
                 [_times addObject:[self getTimeRepresentationWithDate:object[@"due"]]];
+                [_completeStatuses addObject:object[@"complete"]];
                 [_ids addObject:object.objectId];
             }
             else {
@@ -106,13 +107,11 @@
                 BOOL tomorrow = [self isSameDayWithToday:tmrwDate due:object[@"due"]];
                 if (tomorrow){
                     [_assignmentsTmrw addObject:object[@"assignment_name"]];
-                    //NSString *text = [NSString stringWithFormat:@"%@",object[@"priority"]];
                     [_timesTmrw addObject:[self getTimeRepresentationWithDate:object[@"due"]]];
+                    [_completeStatusesTmrw addObject:object[@"complete"]];
                     [_ids_tmrw addObject:object.objectId];
                 }
             }
-            
-            NSLog(@"%hhd", (char)sameDate);
         }
         [self.tableView reloadData];
     } else {
@@ -166,16 +165,15 @@
 
 - (BOOL)isSameDayWithToday:(NSDate*)date1 due:(NSDate*)date2
 {
+    // Date 1 is TODAY and Date 2 is DUE_DATE:
+    
     NSCalendar* calendar = [NSCalendar currentCalendar];
     
     unsigned unitFlags = NSYearCalendarUnit | NSMonthCalendarUnit |  NSDayCalendarUnit | NSHourCalendarUnit;
     NSDateComponents* comp1 = [calendar components:unitFlags fromDate:date1];
     NSDateComponents* comp2 = [calendar components:unitFlags fromDate:date2];
     
-    //return [comp1 day] == [comp2 day] && [comp1 month] == [comp2 month] && [comp1 year]  == [comp2 year];
-    // Date 1 is TODAY and Date 2 is DUE_DATE:
-    
-    if ([comp1 year] == [comp2 year]){
+     if ([comp1 year] == [comp2 year]){
         // Dates are in same year:
         if ([comp1 month] == [comp2 month]) {
             // Dates are in same month:
@@ -235,10 +233,10 @@
 {
     switch (section) {
         case 0:
-            return @"Today";
+            return @"Due Tonight";
             break;
         case 1:
-            return @"Tomorrow";
+            return @"Due Tomorrow";
             break;
             
         default:
@@ -310,15 +308,19 @@
 }
 
 
-/*
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
+    NSString * segueIdentifier = [segue identifier];
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
+    if([segueIdentifier isEqualToString:@"AssignmentSegue"]){
+        AssignmentDetailViewController *detailController = (AssignmentDetailViewController *)[segue destinationViewController];
+        detailController.objectId = [_ids objectAtIndex:indexPath.row];
+    }
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
 }
-*/
 
 @end

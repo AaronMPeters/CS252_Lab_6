@@ -44,21 +44,8 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
 </data>
                                 </timeZone>
                             </datePicker>
-                            <stepper opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minimumValue="1" maximumValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="RTn-mN-rdz">
-                                <rect key="frame" x="182" y="95" width="94" height="29"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <connections>
-                                    <action selector="priorityStepperValueChanged:" destination="CZ4-MO-1fc" eventType="valueChanged" id="xHr-Ei-ZJF"/>
-                                </connections>
-                            </stepper>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="1" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Slt-Gx-vFS">
-                                <rect key="frame" x="141" y="99" width="25" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4EZ-33-RdT">
-                                <rect key="frame" x="104" y="353" width="113" height="30"/>
+                                <rect key="frame" x="104" y="97" width="113" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Add Assignment">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -67,12 +54,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                     <action selector="addAssignmentClick:" destination="CZ4-MO-1fc" eventType="touchUpInside" id="PFI-et-E1x"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Priority:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="erm-3V-KFf">
-                                <rect key="frame" x="47" y="99" width="59" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Describe Assignment" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dqe-pe-RRH">
                                 <rect key="frame" x="20" y="51" width="280" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -90,13 +71,11 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <outlet property="addAssignmentButton" destination="4EZ-33-RdT" id="c6F-nB-gdd"/>
                         <outlet property="assignmentDescriptionTextField" destination="dqe-pe-RRH" id="9s4-pt-Osl"/>
                         <outlet property="datePicker" destination="yma-ZL-aT0" id="7pl-if-rSR"/>
-                        <outlet property="priorityLabel" destination="Slt-Gx-vFS" id="J2p-ow-jXA"/>
-                        <outlet property="priorityStepper" destination="RTn-mN-rdz" id="Xop-sn-BMF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qh2-T1-AhA" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1300" y="-134"/>
+            <point key="canvasLocation" x="2312" y="14"/>
         </scene>
         <!--Week View Controller - Month-->
         <scene sceneID="T2b-TQ-Ws4">
@@ -182,9 +161,9 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1Vc-1F-5V8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1300" y="694"/>
+            <point key="canvasLocation" x="1786" y="690"/>
         </scene>
-        <!--ViewTVC - View-->
+        <!--ViewTVC - Upcoming Assignments-->
         <scene sceneID="uFa-NQ-gdx">
             <objects>
                 <tableViewController id="ZYU-Mg-Jdp" customClass="ViewTVC" sceneMemberID="viewController">
@@ -194,7 +173,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" editingAccessoryType="checkmark" textLabel="VOi-Or-Hf7" detailTextLabel="qtg-Vq-HUP" style="IBUITableViewCellStyleValue1" id="0kk-bl-gxN">
-                                <rect key="frame" x="0.0" y="55" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="119" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="0kk-bl-gxN" id="oh7-oJ-Wmp">
                                     <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
@@ -216,6 +195,9 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="PAY-bs-vlY" kind="push" identifier="AssignmentSegue" id="IgL-iC-AwV"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <sections/>
@@ -224,11 +206,110 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                             <outlet property="delegate" destination="ZYU-Mg-Jdp" id="Uoz-LS-XgV"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="View" image="second" id="5Mr-L2-7eA"/>
+                    <navigationItem key="navigationItem" title="Upcoming Assignments" id="lY9-Vn-aE3"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TLy-EB-Pa5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="653" y="-540"/>
+            <point key="canvasLocation" x="1179" y="-540"/>
+        </scene>
+        <!--Assignment Detail View Controller - Assignment Details-->
+        <scene sceneID="A8r-78-LEY">
+            <objects>
+                <viewController id="PAY-bs-vlY" customClass="AssignmentDetailViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="EcU-cv-0Rj"/>
+                        <viewControllerLayoutGuide type="bottom" id="gAk-Zj-h48"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="N7b-Gq-Qh0">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Describe Assignment" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DQS-z7-khA">
+                                <rect key="frame" x="20" y="84" width="280" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="assignmentDescriptionDidEnd:" destination="CZ4-MO-1fc" eventType="editingDidEndOnExit" id="IFG-s8-0h6"/>
+                                </connections>
+                            </textField>
+                            <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="30" translatesAutoresizingMaskIntoConstraints="NO" id="d1b-vX-cpz">
+                                <rect key="frame" x="20" y="203" width="290" height="162"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <date key="date" timeIntervalSinceReferenceDate="419917626.17574197">
+                                    <!--2014-04-23 03:47:06 +0000-->
+                                </date>
+                                <timeZone key="timeZone" name="America/Los_Angeles">
+                                    <mutableData key="data">
+VFppZgAAAAAAAAAAAAAAAAAAAAAAAAAEAAAABAAAAAAAAAC5AAAABAAAABCepkign7sVkKCGKqChmveQ
+y4kaoNIj9HDSYSYQ1v50INiArZDa/tGg28CQENzes6DdqayQ3r6VoN+JjpDgnneg4WlwkOJ+WaDjSVKQ
+5F47oOUpNJDmR1gg5xJREOgnOiDo8jMQ6gccIOrSFRDr5v4g7LH3EO3G4CDukdkQ76/8oPBxuxDxj96g
+8n/BkPNvwKD0X6OQ9U+ioPY/hZD3L4Sg+CiiEPkPZqD6CIQQ+viDIPvoZhD82GUg/chIEP64RyD/qCoQ
+AJgpIAGIDBACeAsgA3EokARhJ6AFUQqQBkEJoAcw7JAHjUOgCRDOkAmtvyAK8LCQC+CvoAzZzRANwJGg
+DrmvEA+priAQmZEQEYmQIBJ5cxATaXIgFFlVEBVJVCAWOTcQFyk2IBgiU5AZCRggGgI1kBryNKAb4heQ
+HNIWoB3B+ZAesfigH6HbkCB2KyAhgb2QIlYNICNq2hAkNe8gJUq8ECYV0SAnKp4QJ/7toCkKgBAp3s+g
+KupiECu+saAs036QLZ6ToC6zYJAvfnWgMJNCkDFnkiAycySQM0d0IDRTBpA1J1YgNjLokDcHOCA4HAUQ
+OOcaIDn75xA6xvwgO9vJEDywGKA9u6sQPo/6oD+bjRBAb9ygQYSpkEJPvqBDZIuQRC+goEVEbZBF89Mg
+Ry2KEEfTtSBJDWwQSbOXIErtThBLnLOgTNZqkE18laBOtkyQT1x3oFCWLpBRPFmgUnYQkFMcO6BUVfKQ
+VPwdoFY11JBW5TogWB7xEFjFHCBZ/tMQWqT+IFvetRBchOAgXb6XEF5kwiBfnnkQYE3eoGGHlZBiLcCg
+Y2d3kGQNoqBlR1mQZe2EoGcnO5BnzWagaQcdkGmtSKBq5v+Qa5ZlIGzQHBBtdkcgbq/+EG9WKSBwj+AQ
+cTYLIHJvwhBzFe0gdE+kEHT/CaB2OMCQdt7roHgYopB4vs2gefiEkHqer6B72GaQfH6RoH24SJB+XnOg
+f5gqkAABAAECAwEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEA
+AQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEA
+AQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEA
+AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
+</mutableData>
+                                </timeZone>
+                            </datePicker>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eaX-Ue-uTT">
+                                <rect key="frame" x="104" y="127" width="112" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Edit Assignment">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="addAssignmentClick:" destination="CZ4-MO-1fc" eventType="touchUpInside" id="aHq-hI-hFM"/>
+                                    <action selector="editAssignmentButtonDidPress:" destination="PAY-bs-vlY" eventType="touchUpInside" id="Il2-E6-KdF"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nTF-8f-cBy">
+                                <rect key="frame" x="80" y="474" width="160" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                <state key="normal" title="Delete Assignment">
+                                    <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="addAssignmentClick:" destination="CZ4-MO-1fc" eventType="touchUpInside" id="xMu-PK-xLt"/>
+                                    <action selector="deleteButtonDidPress:" destination="PAY-bs-vlY" eventType="touchUpInside" id="Xy6-El-m6N"/>
+                                </connections>
+                            </button>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ET0-bm-wmz">
+                                <rect key="frame" x="191" y="160" width="51" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </switch>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Complete:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aeT-EL-Rb5">
+                                <rect key="frame" x="80" y="165" width="80" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Assignment Details" id="o2a-5J-Lg1"/>
+                    <connections>
+                        <outlet property="assignmentDescriptionTextField" destination="DQS-z7-khA" id="50Q-ao-5m4"/>
+                        <outlet property="completeSwitch" destination="ET0-bm-wmz" id="DH0-2g-Ig4"/>
+                        <outlet property="datePicker" destination="d1b-vX-cpz" id="gyS-nu-5BS"/>
+                        <outlet property="deleteAssignmentButton" destination="nTF-8f-cBy" id="LaY-L7-jQh"/>
+                        <outlet property="editAssignmentButton" destination="eaX-Ue-uTT" id="gf3-OG-oKd"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rWj-8D-HUA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1665" y="-540"/>
         </scene>
         <!--View Controller - Settings-->
         <scene sceneID="IVw-7z-27f">
@@ -269,7 +350,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
-                        <segue destination="ZYU-Mg-Jdp" kind="relationship" relationship="viewControllers" id="fpK-mP-JvP"/>
+                        <segue destination="qCG-Lc-v3f" kind="relationship" relationship="viewControllers" id="fpK-mP-JvP"/>
                         <segue destination="CZ4-MO-1fc" kind="relationship" relationship="viewControllers" id="SUk-Ux-ee1"/>
                         <segue destination="Vwf-EW-XZT" kind="relationship" relationship="viewControllers" id="njm-z2-c1T"/>
                         <segue destination="FtZ-j5-R1k" kind="relationship" relationship="viewControllers" id="wnL-v8-tID"/>
@@ -278,6 +359,25 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FNP-y4-bzi" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="132" y="180"/>
+        </scene>
+        <!--Navigation Controller - View-->
+        <scene sceneID="gF3-ja-JvA">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="qCG-Lc-v3f" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="View" image="second" id="5Mr-L2-7eA"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="3FQ-aD-GjP">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="ZYU-Mg-Jdp" kind="relationship" relationship="rootViewController" id="DB7-pp-g8d"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hvu-j5-XE7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="653" y="-540"/>
         </scene>
     </scenes>
     <resources>
