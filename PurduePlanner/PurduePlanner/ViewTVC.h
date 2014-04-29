@@ -22,4 +22,7 @@
 @property (strong, nonatomic) NSMutableArray *completeStatusesTmrw;
 @property (strong, nonatomic) NSMutableArray *ids_tmrw;
 
++ (BOOL)isSameDayWithToday:(NSDate*)date1 due:(NSDate*)date2;
++ (BOOL)isLastDayofMonthWithDate:(NSDate*)date;
+
 @end

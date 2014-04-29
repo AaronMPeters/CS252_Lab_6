@@ -95,7 +95,7 @@
         // Do something with the found objects
         for (PFObject *object in objects) {
             NSDate *today = [NSDate date];
-            BOOL sameDate = [self isSameDayWithToday:today due:object[@"due"]];
+            BOOL sameDate = [ViewTVC isSameDayWithToday:today due:object[@"due"]];
             if (sameDate){
                 [_assignments addObject:object[@"assignment_name"]];
                 [_times addObject:[self getTimeRepresentationWithDate:object[@"due"]]];
@@ -104,7 +104,7 @@
             }
             else {
                 NSDate *tmrwDate = [today dateByAddingTimeInterval:60*60*24];
-                BOOL tomorrow = [self isSameDayWithToday:tmrwDate due:object[@"due"]];
+                BOOL tomorrow = [ViewTVC isSameDayWithToday:tmrwDate due:object[@"due"]];
                 if (tomorrow){
                     [_assignmentsTmrw addObject:object[@"assignment_name"]];
                     [_timesTmrw addObject:[self getTimeRepresentationWithDate:object[@"due"]]];
@@ -142,7 +142,7 @@
     return time;
 }
 
-- (BOOL)isLastDayofMonthWithDate:(NSDate*)date
++ (BOOL)isLastDayofMonthWithDate:(NSDate*)date
 {
     NSCalendar* calendar = [NSCalendar currentCalendar];
     
@@ -157,13 +157,14 @@
         return day == 31;
     else if (month != 2)
         return day == 30;
+#warning leap year implementation needs to be added
     else
         return day == 28;
     
     return NO;
 }
 
-- (BOOL)isSameDayWithToday:(NSDate*)date1 due:(NSDate*)date2
++ (BOOL)isSameDayWithToday:(NSDate*)date1 due:(NSDate*)date2
 {
     // Date 1 is TODAY and Date 2 is DUE_DATE:
     
@@ -260,11 +261,6 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
-    /*if (cell.accessoryType == UITableViewCellAccessoryCheckmark)
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    else
-        cell.accessoryType = UITableViewCellAccessoryCheckmark;*/
 }
 
 // Override to support conditional editing of the table view.

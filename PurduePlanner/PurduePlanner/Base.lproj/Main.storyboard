@@ -77,7 +77,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             </objects>
             <point key="canvasLocation" x="2838" y="14"/>
         </scene>
-        <!--Week View Controller - Month-->
+        <!--Week View Controller - Week-->
         <scene sceneID="T2b-TQ-Ws4">
             <objects>
                 <viewController id="Vwf-EW-XZT" customClass="WeekViewController" sceneMemberID="viewController">
@@ -196,7 +196,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Month" image="first" id="nK2-Zr-daz"/>
+                    <tabBarItem key="tabBarItem" title="Week" image="first" id="nK2-Zr-daz"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1Vc-1F-5V8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

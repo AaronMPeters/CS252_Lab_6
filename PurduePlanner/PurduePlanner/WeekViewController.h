@@ -8,9 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import <Parse/Parse.h>
+#include "ViewTVC.h"
 
 @interface WeekViewController : UIViewController <UICollectionViewDelegate, UICollectionViewDataSource, UITableViewDelegate, UITableViewDataSource>
 
 @property (strong, nonatomic) NSMutableDictionary *daysAndAssignments;
+@property (nonatomic) int start_date;
+@property (nonatomic) int start_month;
 
 @end

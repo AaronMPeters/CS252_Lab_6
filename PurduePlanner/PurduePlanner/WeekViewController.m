@@ -8,6 +8,9 @@
 
 #import "WeekViewController.h"
 
+#define MAX_DAYS 21  // Maximum days in the calendar
+#define DAYS_IN_WEEK 7;
+
 @interface WeekViewController ()
 
 @end
@@ -40,6 +43,7 @@
      
      */
     _daysAndAssignments = [[NSMutableDictionary alloc] init];
+    [self getInformationFromServer];
     
     array = [[NSMutableArray alloc] init];
     [array addObject:@"Su"];
@@ -73,16 +77,52 @@
 
 - (void)getInformationFromServer
 {
-    PFQuery *query = [PFQuery queryWithClassName:@"GameScore"];
-    [query whereKey:@"playerName" equalTo:@"Dan Stemkoski"];
+    NSDate *date = [NSDate date];
+    NSCalendar* calendar = [NSCalendar currentCalendar];
+    
+    unsigned unitFlags = NSYearCalendarUnit | NSMonthCalendarUnit |  NSDayCalendarUnit | NSWeekdayCalendarUnit;
+    NSDateComponents* comp1 = [calendar components:unitFlags fromDate:date];
+    
+    /* Force the date to rewind to the Sunday of the current week */
+    if ([comp1 weekday] > 1){
+        date = [date dateByAddingTimeInterval:-60*60*24*([comp1 weekday] - 1)];
+    }
+    
+    comp1 = [calendar components:unitFlags fromDate:date];
+    _start_date = (int)[comp1 date];
+    _start_month = (int)[comp1 month];
+    
+    PFQuery *query = [PFQuery queryWithClassName:@"Assignments"];
+    [query orderByAscending:@"due"];
+    [query whereKey:@"due" greaterThanOrEqualTo:date];
+    query.cachePolicy = kPFCachePolicyNetworkElseCache;
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
-            // The find succeeded.
-            NSLog(@"Successfully retrieved %d scores.", objects.count);
-            // Do something with the found objects
-            for (PFObject *object in objects) {
-                NSLog(@"%@", object.objectId);
+            NSDate *comparDate = date;
+            int lcv = 0, incr_count = 0;
+            NSMutableArray *temp = [[NSMutableArray alloc] init];
+#warning not implementing first on month correctly. Look at assignment: Math due on May 01
+            while (lcv < [objects count] && incr_count < MAX_DAYS){
+                PFObject *obj = [objects objectAtIndex:lcv];
+                if ([ViewTVC isSameDayWithToday:comparDate due:obj[@"due"]]){
+                    [temp addObject:obj];
+                    NSLog(@"%@", obj[@"assignment_name"]);
+                    lcv++;
+                }
+                else {
+                    if ([temp count] > 0){
+                        NSDateComponents* comp = [calendar components:unitFlags fromDate:comparDate];
+                        NSLog(@"%ld", (long)[comp day]);
+                        NSString *strFromInt = [NSString stringWithFormat:@"%d",[comp day]];
+                        [_daysAndAssignments setObject:temp forKey:strFromInt];
+                        temp = [[NSMutableArray alloc] init];
+                        NSLog(@"%@", _daysAndAssignments);
+                    }
+                    comparDate = [comparDate dateByAddingTimeInterval:60*60*24];
+                    incr_count++;
+                }
             }
+            
         } else {
             // Log details of the failure
             NSLog(@"Error: %@ %@", error, [error userInfo]);
@@ -94,13 +134,13 @@
 
 -(NSInteger) numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
-    return 3;
+    return MAX_DAYS / DAYS_IN_WEEK;
 }
 
 
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return [array count];
+    return [array count]; //MAX_DAYS;
 }
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
