@@ -98,7 +98,7 @@
             BOOL sameDate = [ViewTVC isSameDayWithToday:today due:object[@"due"]];
             if (sameDate){
                 [_assignments addObject:object[@"assignment_name"]];
-                [_times addObject:[self getTimeRepresentationWithDate:object[@"due"]]];
+                [_times addObject:[ViewTVC getTimeRepresentationWithDate:object[@"due"]]];
                 [_completeStatuses addObject:object[@"complete"]];
                 [_ids addObject:object.objectId];
             }
@@ -107,7 +107,7 @@
                 BOOL tomorrow = [ViewTVC isSameDayWithToday:tmrwDate due:object[@"due"]];
                 if (tomorrow){
                     [_assignmentsTmrw addObject:object[@"assignment_name"]];
-                    [_timesTmrw addObject:[self getTimeRepresentationWithDate:object[@"due"]]];
+                    [_timesTmrw addObject:[ViewTVC getTimeRepresentationWithDate:object[@"due"]]];
                     [_completeStatusesTmrw addObject:object[@"complete"]];
                     [_ids_tmrw addObject:object.objectId];
                 }
@@ -121,7 +121,7 @@
     }];
 }
 
-- (NSString *)getTimeRepresentationWithDate:(NSDate *)date
++ (NSString *)getTimeRepresentationWithDate:(NSDate *)date
 {
     NSDateFormatter *format = [[NSDateFormatter alloc] init];
     [format setDateFormat:@"hh:mm a"];

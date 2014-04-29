@@ -13,6 +13,10 @@
 @interface WeekViewController : UIViewController <UICollectionViewDelegate, UICollectionViewDataSource, UITableViewDelegate, UITableViewDataSource>
 
 @property (strong, nonatomic) NSMutableDictionary *daysAndAssignments;
+@property (strong, nonatomic) NSMutableArray *assignments;
+@property (strong, nonatomic) NSMutableArray *times;
+@property (strong, nonatomic) NSMutableArray *completeStatuses;
+@property (strong, nonatomic) NSMutableArray *ids;
 @property (nonatomic) int start_date;
 @property (nonatomic) int start_month;
 

@@ -13,6 +13,7 @@
 
 @interface WeekViewController ()
 @property (weak, nonatomic) IBOutlet UICollectionView *calendarCollectionView;
+@property (weak, nonatomic) IBOutlet UITableView *assignmentTable;
 
 @end
 
@@ -33,10 +34,18 @@
 
 - (void)viewDidAppear:(BOOL)animated
 {
+    [[self navigationController] setNavigationBarHidden:YES animated:YES];
+    
     _daysAndAssignments = [[NSMutableDictionary alloc] init];
     current_date = -1;
     finished = NO;
+    _assignments = [[NSMutableArray alloc] init];
+    _times = [[NSMutableArray alloc] init];
+    _ids = [[NSMutableArray alloc] init];
+    _completeStatuses = [[NSMutableArray alloc] init];
+    [self.assignmentTable reloadData];
     [self getInformationFromServer];
+    
 }
 
 - (void)viewDidLoad
@@ -72,17 +81,6 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 - (void)getInformationFromServer
 {
@@ -151,7 +149,7 @@
 
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return [array count]; //MAX_DAYS;
+    return DAYS_IN_WEEK;
 }
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -190,6 +188,40 @@
     return cell;
 }
 
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    UICollectionViewCell *cell = [self.calendarCollectionView cellForItemAtIndexPath:indexPath];
+    UILabel *labelDate = (UILabel *)[cell viewWithTag:100];
+    NSString *tag = labelDate.text;
+    
+    [cell.layer setBorderColor:[UIColor redColor].CGColor];
+    [cell.layer setBorderWidth:2.0f];
+    
+    _assignments = [[NSMutableArray alloc] init];
+    _times = [[NSMutableArray alloc] init];
+    _ids = [[NSMutableArray alloc] init];
+    _completeStatuses = [[NSMutableArray alloc] init];
+    
+    NSArray *objects = [_daysAndAssignments objectForKey:tag];
+    if (objects){
+        for (PFObject * assignment in objects){
+            [_ids addObject:assignment.objectId];
+            [_assignments addObject:assignment[@"assignment_name"]];
+            [_times addObject:[ViewTVC getTimeRepresentationWithDate:assignment[@"due"]]];
+            [_completeStatuses addObject:assignment[@"complete"]];
+        }
+    }
+    [self.assignmentTable reloadData];
+}
+
+-(void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    UICollectionViewCell *cell = [self.calendarCollectionView cellForItemAtIndexPath:indexPath];
+    
+    [cell.layer setBorderWidth:1.0f];
+    [cell.layer setBorderColor:[UIColor whiteColor].CGColor];
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -201,20 +233,47 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return 10;
+    return [_assignments count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell_MonthView" forIndexPath:indexPath];
-    cell.textLabel.text = @"Text";
-    return cell;
     
+    if ([_assignments count]){
+        cell.detailTextLabel.text = [_times objectAtIndex:indexPath.row];
+        cell.textLabel.text = [_assignments objectAtIndex:indexPath.row];
+        NSNumber *num = [NSNumber numberWithBool:[[_completeStatuses objectAtIndex:indexPath.row] boolValue]];
+        int i = [num intValue];
+        if (i)
+            cell.accessoryType = UITableViewCellAccessoryCheckmark;
+        else
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    }
+
+    return cell;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
     return @"Assignments";
+}
+
+
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    NSString * segueIdentifier = [segue identifier];
+    NSIndexPath *indexPath = [self.assignmentTable indexPathForCell:sender];
+    if([segueIdentifier isEqualToString:@"MonthAssignmentSegue"]){
+        [[self navigationController] setNavigationBarHidden:NO animated:YES];
+        AssignmentDetailViewController *detailController = (AssignmentDetailViewController *)[segue destinationViewController];
+            detailController.objectId = [_ids objectAtIndex:indexPath.row];
+    }
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
 }
 
 @end
