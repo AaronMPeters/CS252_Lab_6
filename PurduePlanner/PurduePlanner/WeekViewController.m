@@ -12,11 +12,14 @@
 #define DAYS_IN_WEEK 7;
 
 @interface WeekViewController ()
+@property (weak, nonatomic) IBOutlet UICollectionView *calendarCollectionView;
 
 @end
 
 @implementation WeekViewController {
     NSMutableArray *array;
+    int current_date;
+    BOOL finished;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -26,6 +29,14 @@
         // Custom initialization
     }
     return self;
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    _daysAndAssignments = [[NSMutableDictionary alloc] init];
+    current_date = -1;
+    finished = NO;
+    [self getInformationFromServer];
 }
 
 - (void)viewDidLoad
@@ -42,8 +53,6 @@
     NSLog(@"%@", [[dict objectForKey:@"alpha"] objectAtIndex:1]);
      
      */
-    _daysAndAssignments = [[NSMutableDictionary alloc] init];
-    [self getInformationFromServer];
     
     array = [[NSMutableArray alloc] init];
     [array addObject:@"Su"];
@@ -89,7 +98,7 @@
     }
     
     comp1 = [calendar components:unitFlags fromDate:date];
-    _start_date = (int)[comp1 date];
+    _start_date = (int)[comp1 day];
     _start_month = (int)[comp1 month];
     
     PFQuery *query = [PFQuery queryWithClassName:@"Assignments"];
@@ -122,6 +131,8 @@
                     incr_count++;
                 }
             }
+            finished = YES;
+            [self.calendarCollectionView reloadData];
             
         } else {
             // Log details of the failure
@@ -147,13 +158,34 @@
 {
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"Cell" forIndexPath:indexPath];
     
-    UILabel *label = (UILabel *)[cell viewWithTag:100];
-    label.text = [array objectAtIndex:indexPath.row];
+    UILabel *labelDate = (UILabel *)[cell viewWithTag:100];
+    UILabel *labelCount = (UILabel *)[cell viewWithTag:200];
     
     [cell.layer setBorderWidth:1.0f];
     [cell.layer setBorderColor:[UIColor whiteColor].CGColor];
-    
     [cell.layer setCornerRadius:5.0f];
+    
+    if (finished){
+        if (current_date == -1)
+            current_date = _start_date;
+        
+        NSString *strFromInt = [NSString stringWithFormat:@"%d", current_date];
+        labelDate.text = strFromInt;
+        NSArray *temp = [_daysAndAssignments objectForKey:strFromInt];
+        int count = [temp count];
+        if (count > 0)
+            [labelCount setTextColor:[UIColor redColor]];
+        else
+            [labelCount setTextColor:[UIColor darkGrayColor]];
+        
+        strFromInt = [NSString stringWithFormat:@"%d", count];
+        labelCount.text = strFromInt;
+        current_date ++;
+        
+        if ([ViewTVC isLastDayofMonthWithDay:current_date-1 andMonth:_start_month]){
+            current_date = 1;
+        }
+    }
     
     return cell;
 }

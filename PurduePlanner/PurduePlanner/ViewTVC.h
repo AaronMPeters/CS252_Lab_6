@@ -24,5 +24,6 @@
 
 + (BOOL)isSameDayWithToday:(NSDate*)date1 due:(NSDate*)date2;
 + (BOOL)isLastDayofMonthWithDate:(NSDate*)date;
++ (BOOL)isLastDayofMonthWithDay:(int)date andMonth:(int)month;
 
 @end

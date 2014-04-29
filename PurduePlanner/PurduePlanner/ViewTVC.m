@@ -164,6 +164,22 @@
     return NO;
 }
 
++ (BOOL)isLastDayofMonthWithDay:(int)date andMonth:(int)month
+{
+    int day = date;
+    NSLog(@"%d/%d", month, day);
+    
+    if (month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12)
+        return day == 31;
+    else if (month != 2)
+        return day == 30;
+#warning leap year implementation needs to be added
+    else
+        return day == 28;
+    
+    return NO;
+}
+
 + (BOOL)isSameDayWithToday:(NSDate*)date1 due:(NSDate*)date2
 {
     // Date 1 is TODAY and Date 2 is DUE_DATE:
