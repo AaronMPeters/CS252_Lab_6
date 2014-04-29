@@ -29,17 +29,26 @@
 {
     [super viewDidLoad];
     
+    /* How to use dicitonaries: 
+     
+    NSDictionary *dict = @{ @"alpha" : @[@"1", @"2", @"3"], @"beta" : @[@"one", @"two", @"three"] };
+    NSLog(@"%@", [[dict objectForKey:@"beta"] objectAtIndex:1]);
+    
+    NSMutableDictionary *mut = [[NSMutableDictionary alloc] init];
+    [mut setObject:@[@"1", @"2", @"3"] forKey:@"alpha"];
+    NSLog(@"%@", [[dict objectForKey:@"alpha"] objectAtIndex:1]);
+     
+     */
+    _daysAndAssignments = [[NSMutableDictionary alloc] init];
+    
     array = [[NSMutableArray alloc] init];
-    [array addObject:@"28"];
-    [array addObject:@"29"];
-    [array addObject:@"30"];
-    [array addObject:@"May"];
-    [array addObject:@"2"];
-    [array addObject:@"5"];
-    [array addObject:@"6"];
-    [array addObject:@"7"];
-    [array addObject:@"8"];
-    [array addObject:@"9"];
+    [array addObject:@"Su"];
+    [array addObject:@"M"];
+    [array addObject:@"T"];
+    [array addObject:@"W"];
+    [array addObject:@"R"];
+    [array addObject:@"F"];
+    [array addObject:@"Sa"];
     
     
     // Do any additional setup after loading the view.
@@ -62,10 +71,30 @@
 }
 */
 
+- (void)getInformationFromServer
+{
+    PFQuery *query = [PFQuery queryWithClassName:@"GameScore"];
+    [query whereKey:@"playerName" equalTo:@"Dan Stemkoski"];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (!error) {
+            // The find succeeded.
+            NSLog(@"Successfully retrieved %d scores.", objects.count);
+            // Do something with the found objects
+            for (PFObject *object in objects) {
+                NSLog(@"%@", object.objectId);
+            }
+        } else {
+            // Log details of the failure
+            NSLog(@"Error: %@ %@", error, [error userInfo]);
+        }
+    }];
+}
+
 #pragma mark Collection View Methods
+
 -(NSInteger) numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
-    return 2;
+    return 3;
 }
 
 
@@ -81,12 +110,39 @@
     UILabel *label = (UILabel *)[cell viewWithTag:100];
     label.text = [array objectAtIndex:indexPath.row];
     
-    [cell.layer setBorderWidth:2.0f];
+    [cell.layer setBorderWidth:1.0f];
     [cell.layer setBorderColor:[UIColor whiteColor].CGColor];
     
-    [cell.layer setCornerRadius:10.0f];
+    [cell.layer setCornerRadius:5.0f];
     
     return cell;
+}
+
+#pragma mark - Table view data source
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    // Return the number of sections.
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    // Return the number of rows in the section.
+    return 10;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell_MonthView" forIndexPath:indexPath];
+    cell.textLabel.text = @"Text";
+    return cell;
+    
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    return @"Assignments";
 }
 
 @end

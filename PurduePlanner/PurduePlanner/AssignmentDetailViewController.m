@@ -33,10 +33,11 @@
 - (IBAction)editAssignmentButtonDidPress:(id)sender
 {
     PFQuery *query = [PFQuery queryWithClassName:@"Assignments"];
+    query.cachePolicy = kPFCachePolicyNetworkElseCache;
     [query getObjectInBackgroundWithId:_objectId block:^(PFObject *assignment, NSError *error) {
         assignment[@"assignment_name"] = _assignmentDescriptionTextField.text;
         assignment[@"due"] = [_datePicker date];
-        int selected = _progressSegmentedControl.selectedSegmentIndex;
+        int selected = (int)_progressSegmentedControl.selectedSegmentIndex;
         if (selected)
             assignment[@"complete"] = @YES;
         else
@@ -55,20 +56,24 @@
 - (void)getInfoFromServer
 {
     PFQuery *query = [PFQuery queryWithClassName:@"Assignments"];
+    query.cachePolicy = kPFCachePolicyNetworkElseCache;
     [query getObjectInBackgroundWithId:_objectId block:^(PFObject *assignment, NSError *error) {
-        _assignmentDescriptionTextField.text = assignment[@"assignment_name"];
-        _datePicker.date = assignment[@"due"];
-        NSNumber *num = [NSNumber numberWithBool:[assignment[@"complete"] boolValue]];
-        int i = [num intValue];
-        [_progressSegmentedControl setSelectedSegmentIndex:i];
+        if (!error){
+            _assignmentDescriptionTextField.text = assignment[@"assignment_name"];
+            _datePicker.date = assignment[@"due"];
+            NSNumber *num = [NSNumber numberWithBool:[assignment[@"complete"] boolValue]];
+            int i = [num intValue];
+            [_progressSegmentedControl setSelectedSegmentIndex:i];
+        }
     }];
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     if (buttonIndex == 0){
         PFQuery *query = [PFQuery queryWithClassName:@"Assignments"];
+        query.cachePolicy = kPFCachePolicyNetworkElseCache;
         [query getObjectInBackgroundWithId:_objectId block:^(PFObject *assignment, NSError *error) {
-            [assignment delete];
+            [assignment deleteEventually];
             [self.navigationController popViewControllerAnimated:YES];
         }];
     }

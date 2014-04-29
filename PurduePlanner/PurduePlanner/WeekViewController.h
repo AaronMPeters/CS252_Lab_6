@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <Parse/Parse.h>
 
-@interface WeekViewController : UIViewController <UICollectionViewDelegate, UICollectionViewDataSource>
+@interface WeekViewController : UIViewController <UICollectionViewDelegate, UICollectionViewDataSource, UITableViewDelegate, UITableViewDataSource>
+
+@property (strong, nonatomic) NSMutableDictionary *daysAndAssignments;
 
 @end
