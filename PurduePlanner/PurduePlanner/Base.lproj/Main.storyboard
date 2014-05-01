@@ -393,7 +393,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Settings" image="first" id="zfc-0P-wud"/>
+                    <tabBarItem key="tabBarItem" title="Settings" image="icon_cog" id="zfc-0P-wud"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BX5-YK-sPm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -424,7 +424,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <scene sceneID="gF3-ja-JvA">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="qCG-Lc-v3f" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Upcoming" image="first" id="5Mr-L2-7eA"/>
+                    <tabBarItem key="tabBarItem" title="Upcoming" image="icon_clipboard" id="5Mr-L2-7eA"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="3FQ-aD-GjP">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -443,7 +443,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <scene sceneID="NvB-tZ-J6Z">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="26k-OB-cjO" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Add" image="first" id="u1e-5L-l1D"/>
+                    <tabBarItem key="tabBarItem" title="Add" image="icon_pencil-edit" id="u1e-5L-l1D"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="l9c-M6-j1M">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -462,7 +462,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <scene sceneID="coU-yA-KD1">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="NEN-Xg-mXy" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Week" image="first" id="nK2-Zr-daz"/>
+                    <tabBarItem key="tabBarItem" title="Week" image="icon_table" id="nK2-Zr-daz"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="6qi-dk-2re">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -479,7 +479,10 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         </scene>
     </scenes>
     <resources>
-        <image name="first" width="30" height="30"/>
+        <image name="icon_clipboard" width="32" height="32"/>
+        <image name="icon_cog" width="32" height="32"/>
+        <image name="icon_pencil-edit" width="32" height="32"/>
+        <image name="icon_table" width="32" height="32"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
@@ -487,6 +490,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="FsA-Cg-92f"/>
+        <segue reference="IgL-iC-AwV"/>
     </inferredMetricsTieBreakers>
 </document>

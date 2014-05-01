@@ -20,6 +20,7 @@
 @implementation WeekViewController {
     NSMutableArray *array;
     int current_date;
+    int todays_date;
     BOOL finished;
 }
 
@@ -34,7 +35,7 @@
 
 - (void)viewDidAppear:(BOOL)animated
 {
-    [[self navigationController] setNavigationBarHidden:YES animated:YES];
+    [[self navigationController] setNavigationBarHidden:YES animated:YES ];
     
     _daysAndAssignments = [[NSMutableDictionary alloc] init];
     current_date = -1;
@@ -89,6 +90,8 @@
     
     unsigned unitFlags = NSYearCalendarUnit | NSMonthCalendarUnit |  NSDayCalendarUnit | NSWeekdayCalendarUnit;
     NSDateComponents* comp1 = [calendar components:unitFlags fromDate:date];
+    
+    todays_date = (int)[comp1 day];
     
     /* Force the date to rewind to the Sunday of the current week */
     if ([comp1 weekday] > 1){
@@ -176,6 +179,9 @@
         else
             [labelCount setTextColor:[UIColor darkGrayColor]];
         
+        if (current_date == todays_date)
+            [cell.layer setBorderWidth:3.0f];
+        
         strFromInt = [NSString stringWithFormat:@"%d", count];
         labelCount.text = strFromInt;
         current_date ++;
@@ -195,7 +201,12 @@
     NSString *tag = labelDate.text;
     
     [cell.layer setBorderColor:[UIColor redColor].CGColor];
-    [cell.layer setBorderWidth:2.0f];
+    
+    int date = [labelDate.text intValue];
+    if (date == todays_date)
+        [cell.layer setBorderWidth:3.0f];
+    else
+        [cell.layer setBorderWidth:2.0f];
     
     _assignments = [[NSMutableArray alloc] init];
     _times = [[NSMutableArray alloc] init];
@@ -217,8 +228,13 @@
 -(void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     UICollectionViewCell *cell = [self.calendarCollectionView cellForItemAtIndexPath:indexPath];
+    UILabel *labelDate = (UILabel *)[cell viewWithTag:100];
+    int date = [labelDate.text intValue];
+    if (date == todays_date)
+        [cell.layer setBorderWidth:3.0f];
+    else
+        [cell.layer setBorderWidth:1.0f];
     
-    [cell.layer setBorderWidth:1.0f];
     [cell.layer setBorderColor:[UIColor whiteColor].CGColor];
 }
 
