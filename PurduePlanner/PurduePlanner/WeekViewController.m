@@ -123,7 +123,13 @@
                     if ([temp count] > 0){
                         NSDateComponents* comp = [calendar components:unitFlags fromDate:comparDate];
                         NSLog(@"%ld", (long)[comp day]);
-                        NSString *strFromInt = [NSString stringWithFormat:@"%d",[comp day]];
+                        
+                        int day = (int)[comp day];
+                        day--;
+                        if (day == 0)
+                            day = [ViewTVC getLastDayOfMonthWithMonth:_start_month];
+
+                        NSString *strFromInt = [NSString stringWithFormat:@"%d",day];
                         [_daysAndAssignments setObject:temp forKey:strFromInt];
                         temp = [[NSMutableArray alloc] init];
                         NSLog(@"%@", _daysAndAssignments);

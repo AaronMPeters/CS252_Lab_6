@@ -26,5 +26,6 @@
 + (BOOL)isLastDayofMonthWithDate:(NSDate*)date;
 + (BOOL)isLastDayofMonthWithDay:(int)date andMonth:(int)month;
 + (NSString *)getTimeRepresentationWithDate:(NSDate *)date;
++ (int)getLastDayOfMonthWithMonth:(int)month;
 
 @end

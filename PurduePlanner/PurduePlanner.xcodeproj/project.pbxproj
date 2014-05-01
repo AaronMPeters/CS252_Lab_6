@@ -29,7 +29,7 @@
 		E51831AB190765B600D504D1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5183187190765B600D504D1 /* Foundation.framework */; };
 		E51831AC190765B600D504D1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E518318B190765B600D504D1 /* UIKit.framework */; };
 		E51831B4190765B600D504D1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E51831B2190765B600D504D1 /* InfoPlist.strings */; };
-		E51831B6190765B600D504D1 /* PurduePlannerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E51831B5190765B600D504D1 /* PurduePlannerTests.m */; };
+		E527AF391911D9D10028CDD9 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E527AF381911D9D10028CDD9 /* SettingsViewController.m */; };
 		E528C2EB190DF228006EF3D0 /* AssignmentDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E528C2EA190DF228006EF3D0 /* AssignmentDetailViewController.m */; };
 		E5A42DE9190886070032932C /* ViewTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E5A42DE8190886070032932C /* ViewTVC.m */; };
 		E5B421B4190B6F9700383045 /* AddAssignmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E5B421B3190B6F9700383045 /* AddAssignmentViewController.m */; };
@@ -73,7 +73,8 @@
 		E51831A9190765B600D504D1 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		E51831B1190765B600D504D1 /* PurduePlannerTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "PurduePlannerTests-Info.plist"; sourceTree = "<group>"; };
 		E51831B3190765B600D504D1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		E51831B5190765B600D504D1 /* PurduePlannerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PurduePlannerTests.m; sourceTree = "<group>"; };
+		E527AF371911D9D10028CDD9 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
+		E527AF381911D9D10028CDD9 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		E528C2E9190DF228006EF3D0 /* AssignmentDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AssignmentDetailViewController.h; sourceTree = "<group>"; };
 		E528C2EA190DF228006EF3D0 /* AssignmentDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AssignmentDetailViewController.m; sourceTree = "<group>"; };
 		E5A42DE7190886070032932C /* ViewTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewTVC.h; sourceTree = "<group>"; };
@@ -171,6 +172,8 @@
 				E5B421B3190B6F9700383045 /* AddAssignmentViewController.m */,
 				E5B421BB190C79C300383045 /* WeekViewController.h */,
 				E5B421BC190C79C300383045 /* WeekViewController.m */,
+				E527AF371911D9D10028CDD9 /* SettingsViewController.h */,
+				E527AF381911D9D10028CDD9 /* SettingsViewController.m */,
 				E5183199190765B600D504D1 /* Main.storyboard */,
 				E51831A2190765B600D504D1 /* Images.xcassets */,
 				E518318E190765B600D504D1 /* Supporting Files */,
@@ -192,7 +195,6 @@
 		E51831AF190765B600D504D1 /* PurduePlannerTests */ = {
 			isa = PBXGroup;
 			children = (
-				E51831B5190765B600D504D1 /* PurduePlannerTests.m */,
 				E51831B0190765B600D504D1 /* Supporting Files */,
 			);
 			path = PurduePlannerTests;
@@ -311,6 +313,7 @@
 				E5B421B4190B6F9700383045 /* AddAssignmentViewController.m in Sources */,
 				E5183194190765B600D504D1 /* main.m in Sources */,
 				E5183198190765B600D504D1 /* PlannerAppDelegate.m in Sources */,
+				E527AF391911D9D10028CDD9 /* SettingsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -318,7 +321,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E51831B6190765B600D504D1 /* PurduePlannerTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -433,7 +435,7 @@
 		E51831BA190765B600D504D1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-1";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -450,7 +452,7 @@
 		E51831BB190765B600D504D1 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-1";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

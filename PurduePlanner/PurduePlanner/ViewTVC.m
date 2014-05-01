@@ -180,6 +180,19 @@
     return NO;
 }
 
++ (int)getLastDayOfMonthWithMonth:(int)month
+{
+    if (month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12)
+        return 31;
+    else if (month != 2)
+        return 30;
+#warning leap year implementation needs to be added
+    else
+        return 28;
+    
+    return NO;
+}
+
 + (BOOL)isSameDayWithToday:(NSDate*)date1 due:(NSDate*)date2
 {
     // Date 1 is TODAY and Date 2 is DUE_DATE:
@@ -214,7 +227,13 @@
                 If it is, check to see if due date's hours are before NEW_DAY threshold and today's hours are after NEW_DAY threshold:
                     If so, RETURN YES:
              */
-            return ([comp2 month] - [comp1 month] == 1) && [self isLastDayofMonthWithDate:date1] && [comp2 day] == 1 && [comp2 hour] < NEW_DAY && [comp1 hour] >= NEW_DAY;
+            if ([comp1 day] > [comp2 day])
+                return ([comp2 month] - [comp1 month] == 1) && [self isLastDayofMonthWithDate:date1] && [comp2 day] == 1 && [comp2 hour] < NEW_DAY && [comp1 hour] >= NEW_DAY;
+            
+            //else return if due date is tomorrow and due date's due time is less than NEW_DAY time and today's date is after NEW_DAY threshold
+            return ([comp1 month] - [comp2 month] == 1) && [self isLastDayofMonthWithDate:date2] && [comp1 day] == 1 && [comp1 hour] < NEW_DAY && [comp2 hour] >= NEW_DAY;
+
+            //return ([comp2 month] - [comp1 month] == 1) && [self isLastDayofMonthWithDate:date1] && [comp2 day] == 1 && [comp2 hour] < NEW_DAY && [comp1 hour] >= NEW_DAY;
         }
     }
     else {
