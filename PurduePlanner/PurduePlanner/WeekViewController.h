@@ -19,5 +19,6 @@
 @property (strong, nonatomic) NSMutableArray *ids;
 @property (nonatomic) int start_date;
 @property (nonatomic) int start_month;
+@property (nonatomic) int start_year;
 
 @end

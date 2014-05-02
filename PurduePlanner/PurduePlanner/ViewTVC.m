@@ -157,14 +157,15 @@
         return day == 31;
     else if (month != 2)
         return day == 30;
-#warning leap year implementation needs to be added
+    else if ([self isYearLeapYearFromDate:date])
+        return day == 29;
     else
         return day == 28;
     
     return NO;
 }
 
-+ (BOOL)isLastDayofMonthWithDay:(int)date andMonth:(int)month
++ (BOOL)isLastDayofMonthWithDay:(int)date andMonth:(int)month andYear:(int)year
 {
     int day = date;
     NSLog(@"%d/%d", month, day);
@@ -173,20 +174,41 @@
         return day == 31;
     else if (month != 2)
         return day == 30;
-#warning leap year implementation needs to be added
+    else if ([self isLeapYearFromYear:year])
+        return day == 29;
     else
         return day == 28;
     
     return NO;
 }
 
-+ (int)getLastDayOfMonthWithMonth:(int)month
++ (BOOL)isLeapYearFromYear:(int)year
+{
+    return (( year%100 != 0) && (year%4 == 0)) || year%400 == 0;
+}
+
++ (BOOL)isYearLeapYearFromDate:(NSDate *)aDate
+{
+    NSInteger year = [self yearFromDate:aDate];
+    return [self isLeapYearFromYear:year];
+}
+
++ (NSInteger)yearFromDate:(NSDate *)aDate
+{
+    NSDateFormatter *dateFormatter = [NSDateFormatter new];
+    dateFormatter.dateFormat = @"yyyy";
+    NSInteger year = [[dateFormatter stringFromDate:aDate] integerValue];
+    return year;
+}
+
++ (int)getLastDayOfMonthWithMonth:(int)month andYear:(int)year
 {
     if (month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12)
         return 31;
     else if (month != 2)
         return 30;
-#warning leap year implementation needs to be added
+    else if ([ViewTVC isLeapYearFromYear:year])
+        return 29;
     else
         return 28;
     

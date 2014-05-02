@@ -24,8 +24,11 @@
 
 + (BOOL)isSameDayWithToday:(NSDate*)date1 due:(NSDate*)date2;
 + (BOOL)isLastDayofMonthWithDate:(NSDate*)date;
-+ (BOOL)isLastDayofMonthWithDay:(int)date andMonth:(int)month;
++ (BOOL)isLastDayofMonthWithDay:(int)date andMonth:(int)month andYear:(int)year;
 + (NSString *)getTimeRepresentationWithDate:(NSDate *)date;
-+ (int)getLastDayOfMonthWithMonth:(int)month;
++ (int)getLastDayOfMonthWithMonth:(int)month andYear:(int)year;
++ (BOOL)isLeapYearFromYear:(int)year;
++ (BOOL)isYearLeapYearFromDate:(NSDate *)aDate;
++ (NSInteger)yearFromDate:(NSDate *)aDate;
 
 @end

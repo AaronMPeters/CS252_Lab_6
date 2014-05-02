@@ -101,6 +101,7 @@
     comp1 = [calendar components:unitFlags fromDate:date];
     _start_date = (int)[comp1 day];
     _start_month = (int)[comp1 month];
+    _start_year = (int)[comp1 year];
     
     PFQuery *query = [PFQuery queryWithClassName:@"Assignments"];
     [query orderByAscending:@"due"];
@@ -111,7 +112,6 @@
             NSDate *comparDate = date;
             int lcv = 0, incr_count = 0;
             NSMutableArray *temp = [[NSMutableArray alloc] init];
-#warning not implementing first on month correctly. Look at assignment: Math due on May 01
             while (lcv < [objects count] && incr_count < MAX_DAYS){
                 PFObject *obj = [objects objectAtIndex:lcv];
                 if ([ViewTVC isSameDayWithToday:comparDate due:obj[@"due"]]){
@@ -127,7 +127,7 @@
                         int day = (int)[comp day];
                         day--;
                         if (day == 0)
-                            day = [ViewTVC getLastDayOfMonthWithMonth:_start_month];
+                            day = [ViewTVC getLastDayOfMonthWithMonth:_start_month andYear:_start_year];
 
                         NSString *strFromInt = [NSString stringWithFormat:@"%d",day];
                         [_daysAndAssignments setObject:temp forKey:strFromInt];
@@ -192,7 +192,7 @@
         labelCount.text = strFromInt;
         current_date ++;
         
-        if ([ViewTVC isLastDayofMonthWithDay:current_date-1 andMonth:_start_month]){
+        if ([ViewTVC isLastDayofMonthWithDay:current_date-1 andMonth:_start_month andYear:_start_year]){
             current_date = 1;
         }
     }
