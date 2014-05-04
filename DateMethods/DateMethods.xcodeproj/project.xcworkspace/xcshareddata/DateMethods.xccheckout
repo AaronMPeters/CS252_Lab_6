@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>64FE988A-FA4A-4666-9ECC-B3585D07BDCF</string>
+	<key>IDESourceControlProjectName</key>
+	<string>DateMethods</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>5C3A0151-5404-43D2-9678-94D790932181</key>
+		<string>https://github.com/AaronMPeters/CS252_Lab_6.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>DateMethods/DateMethods.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>5C3A0151-5404-43D2-9678-94D790932181</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/AaronMPeters/CS252_Lab_6.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>5C3A0151-5404-43D2-9678-94D790932181</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>5C3A0151-5404-43D2-9678-94D790932181</string>
+			<key>IDESourceControlWCCName</key>
+			<string>CS252_Lab_6</string>
+		</dict>
+	</array>
+</dict>
+</plist>

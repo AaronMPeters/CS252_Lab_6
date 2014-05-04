@@ -125,10 +125,10 @@
                         NSLog(@"%ld", (long)[comp day]);
                         
                         int day = (int)[comp day];
-                        day--;
+/*                        day--;
                         if (day == 0)
                             day = [ViewTVC getLastDayOfMonthWithMonth:_start_month andYear:_start_year];
-
+*/
                         NSString *strFromInt = [NSString stringWithFormat:@"%d",day];
                         [_daysAndAssignments setObject:temp forKey:strFromInt];
                         temp = [[NSMutableArray alloc] init];
