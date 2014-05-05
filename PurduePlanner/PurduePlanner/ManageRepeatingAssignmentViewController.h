@@ -7,7 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <sqlite3.h>
 
-@interface ManageRepeatingAssignmentViewController : UIViewController
+@interface ManageRepeatingAssignmentViewController : UIViewController <UIPickerViewDataSource, UIPickerViewDelegate>
+
+@property (strong, nonatomic) NSString *assignmentsDatabasePath;
+@property (nonatomic) sqlite3 *assignmentsDB;
+
+@property (strong, nonatomic) NSArray *assignmentArray;
+@property (strong, nonatomic) NSString *assignment;
+@property (nonatomic) int dayOfWeek;
+
+@property (weak, nonatomic) IBOutlet UITextField *assignmentTextField;
+@property (weak, nonatomic) IBOutlet UIPickerView *dayPickerView;
 
 @end

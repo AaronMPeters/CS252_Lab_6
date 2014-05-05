@@ -1,18 +1,18 @@
 //
-//  ManageRepeatingAssignmentViewController.m
+//  AddRepeatingAssignmentViewController.m
 //  PurduePlanner
 //
 //  Created by Aaron Peters on 5/5/14.
 //  Copyright (c) 2014 Aaron Peters. All rights reserved.
 //
 
-#import "ManageRepeatingAssignmentViewController.h"
+#import "AddRepeatingAssignmentViewController.h"
 
-@interface ManageRepeatingAssignmentViewController ()
+@interface AddRepeatingAssignmentViewController ()
 
 @end
 
-@implementation ManageRepeatingAssignmentViewController{
+@implementation AddRepeatingAssignmentViewController{
     NSArray *daysOfWeek;
 }
 
@@ -28,8 +28,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    daysOfWeek = @[@"Sunday", @"Monday", @"Tuesday", @"Wednesday", @"Thursday", @"Friday", @"Saturday"];
-    _assignmentTextField.text = _assignment;
+    daysOfWeek = @[@"Sunday", @"Monday", @"Tuesday", @"Wednesday", @"Thursday", @"Friday", @"Saturday"];    
     [_dayPickerView selectRow:_dayOfWeek inComponent:0 animated:YES];
     // Do any additional setup after loading the view.
 }

@@ -34,6 +34,7 @@
 		E54AD07B1917422D004824BC /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E54AD07A1917422D004824BC /* libsqlite3.dylib */; };
 		E556550319182AFA001F72CD /* RepeatingAssignmentsTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E556550219182AFA001F72CD /* RepeatingAssignmentsTVC.m */; };
 		E556550619182FEC001F72CD /* ManageRepeatingAssignmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E556550519182FEC001F72CD /* ManageRepeatingAssignmentViewController.m */; };
+		E556550D191837B3001F72CD /* AddRepeatingAssignmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E556550C191837B3001F72CD /* AddRepeatingAssignmentViewController.m */; };
 		E5A42DE9190886070032932C /* ViewTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E5A42DE8190886070032932C /* ViewTVC.m */; };
 		E5B421B4190B6F9700383045 /* AddAssignmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E5B421B3190B6F9700383045 /* AddAssignmentViewController.m */; };
 		E5B421BD190C79C300383045 /* WeekViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E5B421BC190C79C300383045 /* WeekViewController.m */; };
@@ -85,6 +86,8 @@
 		E556550219182AFA001F72CD /* RepeatingAssignmentsTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RepeatingAssignmentsTVC.m; sourceTree = "<group>"; };
 		E556550419182FEC001F72CD /* ManageRepeatingAssignmentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ManageRepeatingAssignmentViewController.h; sourceTree = "<group>"; };
 		E556550519182FEC001F72CD /* ManageRepeatingAssignmentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ManageRepeatingAssignmentViewController.m; sourceTree = "<group>"; };
+		E556550B191837B3001F72CD /* AddRepeatingAssignmentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddRepeatingAssignmentViewController.h; sourceTree = "<group>"; };
+		E556550C191837B3001F72CD /* AddRepeatingAssignmentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddRepeatingAssignmentViewController.m; sourceTree = "<group>"; };
 		E5A42DE7190886070032932C /* ViewTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewTVC.h; sourceTree = "<group>"; };
 		E5A42DE8190886070032932C /* ViewTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewTVC.m; sourceTree = "<group>"; };
 		E5B421B2190B6F9700383045 /* AddAssignmentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddAssignmentViewController.h; sourceTree = "<group>"; };
@@ -222,6 +225,8 @@
 				E556550219182AFA001F72CD /* RepeatingAssignmentsTVC.m */,
 				E556550419182FEC001F72CD /* ManageRepeatingAssignmentViewController.h */,
 				E556550519182FEC001F72CD /* ManageRepeatingAssignmentViewController.m */,
+				E556550B191837B3001F72CD /* AddRepeatingAssignmentViewController.h */,
+				E556550C191837B3001F72CD /* AddRepeatingAssignmentViewController.m */,
 			);
 			name = Settings;
 			sourceTree = "<group>";
@@ -358,6 +363,7 @@
 				E5B421BD190C79C300383045 /* WeekViewController.m in Sources */,
 				E5B421B4190B6F9700383045 /* AddAssignmentViewController.m in Sources */,
 				E556550319182AFA001F72CD /* RepeatingAssignmentsTVC.m in Sources */,
+				E556550D191837B3001F72CD /* AddRepeatingAssignmentViewController.m in Sources */,
 				E5183194190765B600D504D1 /* main.m in Sources */,
 				E5183198190765B600D504D1 /* PlannerAppDelegate.m in Sources */,
 				E527AF391911D9D10028CDD9 /* SettingsViewController.m in Sources */,

@@ -58,15 +58,29 @@
     return @"Manage Assignments";
 }
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    NSString * segueIdentifier = [segue identifier];
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
+    if([segueIdentifier isEqualToString:@"editRepeatSegue"]){
+        ManageRepeatingAssignmentViewController *detailController = (ManageRepeatingAssignmentViewController *)[segue destinationViewController];
+        detailController.assignment = [_assignmentArray objectAtIndex:indexPath.row];
+        detailController.dayOfWeek = _dayOfWeek;
+        detailController.assignmentsDB = _assignmentsDB;
+        detailController.assignmentsDatabasePath = _assignmentsDatabasePath;
+        detailController.title = [NSString stringWithFormat:(@"Edit Assignment")];
+    }
+    else if([segueIdentifier isEqualToString:@"addRepeatingSegue"]){
+        AddRepeatingAssignmentViewController  *detailController = (AddRepeatingAssignmentViewController *)[segue destinationViewController];
+        detailController.dayOfWeek = _dayOfWeek;
+        detailController.assignmentsDB = _assignmentsDB;
+        detailController.assignmentsDatabasePath = _assignmentsDatabasePath;
+    }
 }
-*/
+
 
 @end

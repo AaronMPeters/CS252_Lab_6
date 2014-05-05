@@ -374,6 +374,7 @@
         RepeatingAssignmentsTVC *detailController = (RepeatingAssignmentsTVC *)[segue destinationViewController];
         detailController.assignmentsDB = _assignmentsDB;
         detailController.assignmentsDatabasePath = _assignmentsDatabasePath;
+        detailController.dayOfWeek = indexPath.row;
         NSString *strFromInt = [NSString stringWithFormat:@"%d",indexPath.row];
         detailController.title = [NSString stringWithFormat:(@"Manage %@"), [daysOfWeek objectAtIndex:indexPath.row]];
         detailController.assignmentArray = [_daysAndAssignments objectForKey:strFromInt];
