@@ -7,7 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#include <Parse/Parse.h>
+#import <sqlite3.h>
 
-@interface SettingsViewController : UIViewController
+
+@interface SettingsViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
+
+@property (strong, nonatomic) NSString *databasePath;
+@property (nonatomic) sqlite3 *contactDB;
+
+- (IBAction)saveData:(id)sender;
 
 @end

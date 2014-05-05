@@ -151,7 +151,7 @@
     
     int month = (int)[comp1 month];
     int day = (int)[comp1 day];
-    NSLog(@"%d/%d", month, day);
+    //NSLog(@"%d/%d", month, day);
     
     if (month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12)
         return day == 31;
@@ -168,7 +168,7 @@
 + (BOOL)isLastDayofMonthWithDay:(int)date andMonth:(int)month andYear:(int)year
 {
     int day = date;
-    NSLog(@"%d/%d", month, day);
+    //NSLog(@"%d/%d", month, day);
     
     if (month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12)
         return day == 31;
