@@ -35,16 +35,16 @@
     [super viewDidLoad];
     daysOfWeek = @[@"Sunday", @"Monday", @"Tuesday", @"Wednesday", @"Thursday", @"Friday", @"Saturday"];
     
-    _daysAndAssignments = [[NSMutableDictionary alloc] init];
+    //_daysAndAssignments = [[NSMutableDictionary alloc] init];
     
     [self createOrAccessSettingsDatabase];
     [self createOrAccessAssignmentsDatabase];
     //[self saveDataToAssignmentsWithName:@"Test2" andDay:0];
-     [self updateFromAssignmentsWithName:@"Test2" andDay:0 withNewName:@"Hello World" andNewDay:6];
-    for (int i = 0; i < NUM_DAYS_IN_WEEK; i++) {
+    //[self updateFromAssignmentsWithName:@"Test2" andDay:0 withNewName:@"Hello World" andNewDay:6];
+    /*for (int i = 0; i < NUM_DAYS_IN_WEEK; i++) {
         //[self saveDataToAssignmentsWithName:[NSString stringWithFormat:(@"TestDay: %d"), i] andDay:i];
         [self findFromAssignmentsWithDay:i];
-    }
+    }*/
     //NSLog(@"%@", _daysAndAssignments);
     //[self findFromAssignmentsWithDay:0];
     
@@ -64,6 +64,15 @@
                                                 NSLog(@"%@", @"Error logging in");
                                             }
                                         }];
+    }
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    _daysAndAssignments = [[NSMutableDictionary alloc] init];
+    for (int i = 0; i < NUM_DAYS_IN_WEEK; i++) {
+        //[self saveDataToAssignmentsWithName:[NSString stringWithFormat:(@"TestDay: %d"), i] andDay:i];
+        [self findFromAssignmentsWithDay:i];
     }
 }
 

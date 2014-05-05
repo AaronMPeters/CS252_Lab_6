@@ -8,6 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import <sqlite3.h>
+#import "RepeatingAssignmentsTVC.h"
+
+@protocol sendDataProtocol <NSObject>
+-(void)sendDataToA:(NSString*)string;
+-(void)removeCurrentFromA;
+@end
 
 @interface ManageRepeatingAssignmentViewController : UIViewController <UIPickerViewDataSource, UIPickerViewDelegate>
 
@@ -20,5 +26,7 @@
 
 @property (weak, nonatomic) IBOutlet UITextField *assignmentTextField;
 @property (weak, nonatomic) IBOutlet UIPickerView *dayPickerView;
+
+@property (weak, nonatomic) id delegate;
 
 @end

@@ -44,6 +44,17 @@
     [sender resignFirstResponder];
 }
 
+- (IBAction)saveAssignment:(id)sender
+{
+    int day = [_dayPickerView selectedRowInComponent:0];
+    [self saveDataToAssignmentsWithName:_assignmentTextField.text andDay:day];
+    
+    if (day == _dayOfWeek)
+        [_delegate addDataToA:_assignmentTextField.text];
+    
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 #pragma mark - UIPickerView Methods
 
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
@@ -69,6 +80,34 @@
     //Now, if you want to navigate then;
     // Say, OtherViewController is the controller, where you want to navigate:
     
+}
+
+#pragma mark - SQLite3 methods
+
+- (void)saveDataToAssignmentsWithName:(NSString *)assignment andDay:(int)day
+{
+    sqlite3_stmt    *statement;
+    const char *dbpath = [_assignmentsDatabasePath UTF8String];
+    
+    if (sqlite3_open(dbpath, &_assignmentsDB) == SQLITE_OK)
+    {
+        
+        NSString *insertSQL = [NSString stringWithFormat:
+                               @"INSERT INTO ASSIGNMENTS (assignment, day) VALUES (\"%@\", \"%d\")",
+                               assignment, day];
+        
+        const char *insert_stmt = [insertSQL UTF8String];
+        sqlite3_prepare_v2(_assignmentsDB, insert_stmt,
+                           -1, &statement, NULL);
+        if (sqlite3_step(statement) == SQLITE_DONE)
+        {
+            NSLog(@"%@", @"Added assignment with success");
+        } else {
+            NSLog(@"%@", @"Failed to add contact");
+        }
+        sqlite3_finalize(statement);
+        sqlite3_close(_assignmentsDB);
+    }
 }
 
 /*

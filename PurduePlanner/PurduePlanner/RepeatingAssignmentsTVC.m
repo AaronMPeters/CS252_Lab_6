@@ -10,9 +10,14 @@
 
 @interface RepeatingAssignmentsTVC ()
 
+@property (strong, nonatomic) NSString* importantData;
+
 @end
 
-@implementation RepeatingAssignmentsTVC
+
+@implementation RepeatingAssignmentsTVC{
+    int rowSent;
+}
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -73,14 +78,39 @@
         detailController.assignmentsDB = _assignmentsDB;
         detailController.assignmentsDatabasePath = _assignmentsDatabasePath;
         detailController.title = [NSString stringWithFormat:(@"Edit Assignment")];
+        rowSent = indexPath.row;
+        detailController.delegate = self;
     }
     else if([segueIdentifier isEqualToString:@"addRepeatingSegue"]){
         AddRepeatingAssignmentViewController  *detailController = (AddRepeatingAssignmentViewController *)[segue destinationViewController];
         detailController.dayOfWeek = _dayOfWeek;
         detailController.assignmentsDB = _assignmentsDB;
         detailController.assignmentsDatabasePath = _assignmentsDatabasePath;
+        detailController.delegate = self;
     }
 }
 
+-(void)sendDataToA:(NSString *)string
+{
+    NSLog(@"%@", string);
+    [_assignmentArray setObject:string atIndexedSubscript:rowSent];
+    [self.tableView reloadData];
+    // data will come here inside of ViewControllerA
+}
+
+-(void)removeCurrentFromA
+{
+    [_assignmentArray removeObjectAtIndex:rowSent];
+    [self.tableView reloadData];
+    // data will come here inside of ViewControllerA
+}
+
+-(void)addDataToA:(NSString *)string
+{
+    NSLog(@"%@", string);
+    [_assignmentArray addObject:string];
+    [self.tableView reloadData];
+    // data will come here inside of ViewControllerA
+}
 
 @end

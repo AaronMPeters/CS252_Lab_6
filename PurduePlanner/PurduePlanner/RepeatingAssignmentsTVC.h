@@ -14,7 +14,7 @@
 
 @interface RepeatingAssignmentsTVC : UITableViewController
 
-@property (strong, nonatomic) NSArray *assignmentArray;
+@property (strong, nonatomic) NSMutableArray *assignmentArray;
 @property (nonatomic) int dayOfWeek;
 @property (strong, nonatomic) NSString *assignmentsDatabasePath;
 @property (nonatomic) sqlite3 *assignmentsDB;
