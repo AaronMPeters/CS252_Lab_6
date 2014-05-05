@@ -15,9 +15,10 @@
 
 @property (strong, nonatomic) NSString *databasePath;
 @property (nonatomic) sqlite3 *settingsDB;
-
 @property (strong, nonatomic) NSString *assignmentsDatabasePath;
 @property (nonatomic) sqlite3 *assignmentsDB;
+
+@property (strong, nonatomic) NSMutableDictionary *daysAndAssignments;
 
 - (IBAction)saveData:(id)sender;
 

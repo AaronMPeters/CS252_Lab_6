@@ -35,16 +35,25 @@
     [super viewDidLoad];
     daysOfWeek = @[@"Sunday", @"Monday", @"Tuesday", @"Wednesday", @"Thursday", @"Friday", @"Saturday"];
     
+    _daysAndAssignments = [[NSMutableDictionary alloc] init];
+    
     [self createOrAccessSettingsDatabase];
     [self createOrAccessAssignmentsDatabase];
-    //[self saveDataToAssignmentsWithName:@"Test" andDay:0];
-    [self findFromAssignmentsWithDay:0];
+    //[self saveDataToAssignmentsWithName:@"Test2" andDay:0];
+    [self updateFromAssignmentsWithName:@"Test2" andDay:0 withNewName:@"Hello World" andNewDay:6];
+    for (int i = 0; i < NUM_DAYS_IN_WEEK; i++) {
+        //[self saveDataToAssignmentsWithName:[NSString stringWithFormat:(@"TestDay: %d"), i] andDay:i];
+        [self findFromAssignmentsWithDay:i];
+    }
+    NSLog(@"%@", _daysAndAssignments);
+    //[self findFromAssignmentsWithDay:0];
     
     PFUser *currentUser = [PFUser currentUser];
     if (currentUser) {
-        [currentUser refresh];
-        NSLog(@"Logged in with userID of %@ and name of %@", currentUser.objectId, currentUser[@"name"]);
-        [self findContactFromSettingsWithName:currentUser[@"name"]];
+        [currentUser refreshInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+            NSLog(@"Logged in with userID of %@ and name of %@", currentUser.objectId, currentUser[@"name"]);
+            [self findContactFromSettingsWithName:currentUser[@"name"]];
+        }];
     } else {
         NSLog(@"%@", @"Not logged in");
         [PFUser logInWithUsernameInBackground:@"peter177" password:@"PSSWRD"
@@ -60,7 +69,6 @@
 
 - (IBAction)assignmentDescriptionDidEnd:(id)sender
 {
-    
 }
 
 #pragma mark - SQLite3 methods for Settings DB
@@ -257,6 +265,7 @@
 
 - (void)findFromAssignmentsWithDay:(int)day
 {
+    NSMutableArray *temp = [[NSMutableArray alloc] init];
     const char *dbpath = [_assignmentsDatabasePath UTF8String];
     sqlite3_stmt    *statement;
     
@@ -271,17 +280,51 @@
         if (sqlite3_prepare_v2(_assignmentsDB,
                                query_stmt, -1, &statement, NULL) == SQLITE_OK)
         {
-            if (sqlite3_step(statement) == SQLITE_ROW)
+            while (sqlite3_step(statement) == SQLITE_ROW)
             {
                 NSString *assignmentField = [[NSString alloc]
                                              initWithUTF8String:(const char *)
                                              sqlite3_column_text(statement, 0)];
-                NSLog(@"Assignment Found with Name: %@", assignmentField);
-            } else {
-                NSLog(@"%@", @"Match Not Found");
+                //NSLog(@"Assignment Found with Name: %@", assignmentField);
+                [temp addObject:assignmentField];
             }
             sqlite3_finalize(statement);
         }
+        sqlite3_close(_assignmentsDB);
+        NSString *strFromInt = [NSString stringWithFormat:@"%d",day];
+        [_daysAndAssignments setObject:temp forKey:strFromInt];
+        //NSLog(@"%@", _daysAndAssignments);
+        if (day == NUM_DAYS_IN_WEEK - 1)
+            [self.assignmentTable reloadData];
+    }
+}
+
+- (void)updateFromAssignmentsWithName:(NSString *)assignment andDay:(int)day withNewName:(NSString *)newAssignment andNewDay:(int)newDay
+{
+    sqlite3_stmt    *statement;
+    const char *dbpath = [_assignmentsDatabasePath UTF8String];
+    
+    if (sqlite3_open(dbpath, &_assignmentsDB) == SQLITE_OK)
+    {
+        
+        NSString *updateSQL = [NSString stringWithFormat:
+                               @"UPDATE assignments SET assignment=\"%@\", day=\"%d\" WHERE assignment=\"%@\" AND day=\"%d\"", newAssignment, newDay, assignment, day];
+                               /*UPDATE Customers
+                               SET ContactName='Alfred Schmidt', City='Hamburg'
+                               WHERE CustomerName='Alfreds Futterkiste';
+                               @"INSERT INTO ASSIGNMENTS (assignment, day) VALUES (\"%@\", \"%d\")",
+                               assignment, day];*/
+        
+        const char *update_stmt = [updateSQL UTF8String];
+        sqlite3_prepare_v2(_assignmentsDB, update_stmt,
+                           -1, &statement, NULL);
+        if (sqlite3_step(statement) == SQLITE_DONE)
+        {
+            NSLog(@"%@", @"Updated assignment with success");
+        } else {
+            NSLog(@"%@", @"Failed to update assignment");
+        }
+        sqlite3_finalize(statement);
         sqlite3_close(_assignmentsDB);
     }
 }
@@ -305,7 +348,11 @@
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"RepeatingAssignmentCell" forIndexPath:indexPath];
     cell.textLabel.text = [daysOfWeek objectAtIndex:indexPath.row];
-    cell.detailTextLabel.text = @"0";
+    
+    NSString *strFromInt = [NSString stringWithFormat:@"%d",indexPath.row];
+    NSArray *array = [_daysAndAssignments objectForKey:strFromInt];
+    strFromInt = [NSString stringWithFormat:@"%d",[array count]];
+    cell.detailTextLabel.text = strFromInt;
     return cell;
 }
 
