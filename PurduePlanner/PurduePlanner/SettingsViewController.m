@@ -34,9 +34,17 @@
 {
     [super viewDidLoad];
     daysOfWeek = @[@"Sunday", @"Monday", @"Tuesday", @"Wednesday", @"Thursday", @"Friday", @"Saturday"];
+    
+    [self createOrAccessSettingsDatabase];
+    [self createOrAccessAssignmentsDatabase];
+    //[self saveDataToAssignmentsWithName:@"Test" andDay:0];
+    [self findFromAssignmentsWithDay:0];
+    
     PFUser *currentUser = [PFUser currentUser];
     if (currentUser) {
-        NSLog(@"Logged in with userID of %@", currentUser.objectId);
+        [currentUser refresh];
+        NSLog(@"Logged in with userID of %@ and name of %@", currentUser.objectId, currentUser[@"name"]);
+        [self findContactFromSettingsWithName:currentUser[@"name"]];
     } else {
         NSLog(@"%@", @"Not logged in");
         [PFUser logInWithUsernameInBackground:@"peter177" password:@"PSSWRD"
@@ -48,8 +56,6 @@
                                             }
                                         }];
     }
-    [self createOrAccessDatabase];
-    [self findContactWithName:@"Aaron Peters"];
 }
 
 - (IBAction)assignmentDescriptionDidEnd:(id)sender
@@ -57,9 +63,9 @@
     
 }
 
-#pragma mark - SQLite3 methods
+#pragma mark - SQLite3 methods for Settings DB
 
-- (void)createOrAccessDatabase
+- (void)createOrAccessSettingsDatabase
 {
     NSString *docsDir;
     NSArray *dirPaths;
@@ -81,13 +87,13 @@
     {
         const char *dbpath = [_databasePath UTF8String];
         
-        if (sqlite3_open(dbpath, &_contactDB) == SQLITE_OK)
+        if (sqlite3_open(dbpath, &_settingsDB) == SQLITE_OK)
         {
             char *errMsg;
             const char *sql_stmt =
             "CREATE TABLE IF NOT EXISTS SETTINGS (ID INTEGER PRIMARY KEY AUTOINCREMENT, NAME TEXT, MAJOR TEXT, YEAR TEXT)";
             
-            if (sqlite3_exec(_contactDB, sql_stmt, NULL, NULL, &errMsg) != SQLITE_OK)
+            if (sqlite3_exec(_settingsDB, sql_stmt, NULL, NULL, &errMsg) != SQLITE_OK)
             {
                 NSLog(@"%@", @"Failed to create table");
             }
@@ -95,7 +101,7 @@
             {
                 NSLog(@"%@", @"Successfully created table");
             }
-            sqlite3_close(_contactDB);
+            sqlite3_close(_settingsDB);
         } else {
             NSLog(@"%@", @"Failed to open/create database");
         }
@@ -105,12 +111,18 @@
         NSLog(@"%@", @"Table already exists. Status OK");
     }
 }
+
 - (IBAction)saveData:(id)sender
+{
+    [self saveDataToSettings];
+}
+
+- (void)saveDataToSettings
 {
     sqlite3_stmt    *statement;
     const char *dbpath = [_databasePath UTF8String];
     
-    if (sqlite3_open(dbpath, &_contactDB) == SQLITE_OK)
+    if (sqlite3_open(dbpath, &_settingsDB) == SQLITE_OK)
     {
         
         NSString *insertSQL = [NSString stringWithFormat:
@@ -118,7 +130,7 @@
                                _nameTextField.text, _majorTextField.text, _yearTextField.text];
         
         const char *insert_stmt = [insertSQL UTF8String];
-        sqlite3_prepare_v2(_contactDB, insert_stmt,
+        sqlite3_prepare_v2(_settingsDB, insert_stmt,
                            -1, &statement, NULL);
         if (sqlite3_step(statement) == SQLITE_DONE)
         {
@@ -130,16 +142,16 @@
             NSLog(@"%@", @"Failed to add contact");
         }
         sqlite3_finalize(statement);
-        sqlite3_close(_contactDB);
+        sqlite3_close(_settingsDB);
     }
 }
 
-- (void)findContactWithName:(NSString *)name
+- (void)findContactFromSettingsWithName:(NSString *)name
 {
     const char *dbpath = [_databasePath UTF8String];
     sqlite3_stmt    *statement;
     
-    if (sqlite3_open(dbpath, &_contactDB) == SQLITE_OK)
+    if (sqlite3_open(dbpath, &_settingsDB) == SQLITE_OK)
     {
         NSString *querySQL = [NSString stringWithFormat:
                               @"SELECT major, year FROM settings WHERE name=\"%@\"",
@@ -147,7 +159,7 @@
         
         const char *query_stmt = [querySQL UTF8String];
         
-        if (sqlite3_prepare_v2(_contactDB,
+        if (sqlite3_prepare_v2(_settingsDB,
                                query_stmt, -1, &statement, NULL) == SQLITE_OK)
         {
             if (sqlite3_step(statement) == SQLITE_ROW)
@@ -161,6 +173,7 @@
                                         initWithUTF8String:(const char *)
                                         sqlite3_column_text(statement, 1)];
                 _yearTextField.text = yearField;
+                _nameTextField.text = name;
                 NSLog(@"%@", @"Match Found");
             } else {
                 NSLog(@"%@", @"Match Not Found");
@@ -169,7 +182,107 @@
             }
             sqlite3_finalize(statement);
         }
-        sqlite3_close(_contactDB);
+        sqlite3_close(_settingsDB);
+    }
+}
+
+#pragma mark - SQLite3 methods for Assignments DB
+
+- (void)createOrAccessAssignmentsDatabase
+{
+    NSString *docsDir;
+    NSArray *dirPaths;
+    
+    // Get the documents directory
+    dirPaths = NSSearchPathForDirectoriesInDomains(
+                                                   NSDocumentDirectory, NSUserDomainMask, YES);
+    
+    docsDir = dirPaths[0];
+    
+    // Build the path to the database file
+    _assignmentsDatabasePath = [[NSString alloc]
+                     initWithString: [docsDir stringByAppendingPathComponent:
+                                      @"assignments.db"]];
+    
+    NSFileManager *filemgr = [NSFileManager defaultManager];
+    
+    if ([filemgr fileExistsAtPath: _assignmentsDatabasePath ] == NO)
+    {
+        const char *dbpath = [_assignmentsDatabasePath UTF8String];
+        
+        if (sqlite3_open(dbpath, &_assignmentsDB) == SQLITE_OK)
+        {
+            char *errMsg;
+            const char *sql_stmt =
+            "CREATE TABLE IF NOT EXISTS ASSIGNMENTS (ID INTEGER PRIMARY KEY AUTOINCREMENT, ASSIGNMENT TEXT, DAY INTEGER)";
+            
+            if (sqlite3_exec(_assignmentsDB, sql_stmt, NULL, NULL, &errMsg) != SQLITE_OK)
+                NSLog(@"%@", @"Failed to create table");
+            else
+                NSLog(@"%@", @"Successfully created table");
+            
+            sqlite3_close(_assignmentsDB);
+        } else
+            NSLog(@"%@", @"Failed to open/create database");
+    }
+    else
+        NSLog(@"%@", @"Table already exists. Status OK");
+}
+
+- (void)saveDataToAssignmentsWithName:(NSString *)assignment andDay:(int)day
+{
+    sqlite3_stmt    *statement;
+    const char *dbpath = [_assignmentsDatabasePath UTF8String];
+    
+    if (sqlite3_open(dbpath, &_assignmentsDB) == SQLITE_OK)
+    {
+        
+        NSString *insertSQL = [NSString stringWithFormat:
+                               @"INSERT INTO ASSIGNMENTS (assignment, day) VALUES (\"%@\", \"%d\")",
+                            assignment, day];
+        
+        const char *insert_stmt = [insertSQL UTF8String];
+        sqlite3_prepare_v2(_assignmentsDB, insert_stmt,
+                           -1, &statement, NULL);
+        if (sqlite3_step(statement) == SQLITE_DONE)
+        {
+            NSLog(@"%@", @"Added assignment with success");
+        } else {
+            NSLog(@"%@", @"Failed to add contact");
+        }
+        sqlite3_finalize(statement);
+        sqlite3_close(_assignmentsDB);
+    }
+}
+
+- (void)findFromAssignmentsWithDay:(int)day
+{
+    const char *dbpath = [_assignmentsDatabasePath UTF8String];
+    sqlite3_stmt    *statement;
+    
+    if (sqlite3_open(dbpath, &_assignmentsDB) == SQLITE_OK)
+    {
+        NSString *querySQL = [NSString stringWithFormat:
+                              @"SELECT assignment FROM assignments WHERE day=\"%d\"",
+                              day];
+        
+        const char *query_stmt = [querySQL UTF8String];
+        
+        if (sqlite3_prepare_v2(_assignmentsDB,
+                               query_stmt, -1, &statement, NULL) == SQLITE_OK)
+        {
+            if (sqlite3_step(statement) == SQLITE_ROW)
+            {
+                NSString *assignmentField = [[NSString alloc]
+                                             initWithUTF8String:(const char *)
+                                             sqlite3_column_text(statement, 0)];
+                NSLog(@"Assignment Found with Name: %@", assignmentField);
+            } else {
+                NSLog(@"%@", @"Match Not Found");
+            }
+            sqlite3_finalize(statement);
+        }
+        sqlite3_close(_assignmentsDB);
     }
 }
 

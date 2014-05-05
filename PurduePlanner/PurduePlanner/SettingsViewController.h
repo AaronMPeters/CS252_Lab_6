@@ -14,7 +14,10 @@
 @interface SettingsViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
 @property (strong, nonatomic) NSString *databasePath;
-@property (nonatomic) sqlite3 *contactDB;
+@property (nonatomic) sqlite3 *settingsDB;
+
+@property (strong, nonatomic) NSString *assignmentsDatabasePath;
+@property (nonatomic) sqlite3 *assignmentsDB;
 
 - (IBAction)saveData:(id)sender;
 
