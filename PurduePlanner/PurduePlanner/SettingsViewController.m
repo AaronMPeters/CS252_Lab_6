@@ -40,12 +40,12 @@
     [self createOrAccessSettingsDatabase];
     [self createOrAccessAssignmentsDatabase];
     //[self saveDataToAssignmentsWithName:@"Test2" andDay:0];
-    [self updateFromAssignmentsWithName:@"Test2" andDay:0 withNewName:@"Hello World" andNewDay:6];
+     [self updateFromAssignmentsWithName:@"Test2" andDay:0 withNewName:@"Hello World" andNewDay:6];
     for (int i = 0; i < NUM_DAYS_IN_WEEK; i++) {
         //[self saveDataToAssignmentsWithName:[NSString stringWithFormat:(@"TestDay: %d"), i] andDay:i];
         [self findFromAssignmentsWithDay:i];
     }
-    NSLog(@"%@", _daysAndAssignments);
+    //NSLog(@"%@", _daysAndAssignments);
     //[self findFromAssignmentsWithDay:0];
     
     PFUser *currentUser = [PFUser currentUser];
@@ -362,15 +362,23 @@
 }
 
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    NSString * segueIdentifier = [segue identifier];
+    NSIndexPath *indexPath = [self.assignmentTable indexPathForCell:sender];
+    if([segueIdentifier isEqualToString:@"RepeatingAssignmentSegue"]){
+        RepeatingAssignmentsTVC *detailController = (RepeatingAssignmentsTVC *)[segue destinationViewController];
+        detailController.assignmentsDB = _assignmentsDB;
+        detailController.assignmentsDatabasePath = _assignmentsDatabasePath;
+        NSString *strFromInt = [NSString stringWithFormat:@"%d",indexPath.row];
+        detailController.title = [NSString stringWithFormat:(@"Manage %@"), [daysOfWeek objectAtIndex:indexPath.row]];
+        detailController.assignmentArray = [_daysAndAssignments objectForKey:strFromInt];
+    }
 }
-*/
+
 
 @end

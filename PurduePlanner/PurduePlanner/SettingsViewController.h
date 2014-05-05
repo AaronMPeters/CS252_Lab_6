@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#include <Parse/Parse.h>
 #import <sqlite3.h>
 
+#include <Parse/Parse.h>
+#include "RepeatingAssignmentsTVC.h"
 
 @interface SettingsViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 

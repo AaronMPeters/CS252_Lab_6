@@ -116,13 +116,13 @@
                 PFObject *obj = [objects objectAtIndex:lcv];
                 if ([ViewTVC isSameDayWithToday:comparDate due:obj[@"due"]]){
                     [temp addObject:obj];
-                    NSLog(@"%@", obj[@"assignment_name"]);
+                    //NSLog(@"%@", obj[@"assignment_name"]);
                     lcv++;
                 }
                 else {
                     if ([temp count] > 0){
                         NSDateComponents* comp = [calendar components:unitFlags fromDate:comparDate];
-                        NSLog(@"%ld", (long)[comp day]);
+                        //NSLog(@"%ld", (long)[comp day]);
                         
                         int day = (int)[comp day];
 /*                        day--;
@@ -132,7 +132,7 @@
                         NSString *strFromInt = [NSString stringWithFormat:@"%d",day];
                         [_daysAndAssignments setObject:temp forKey:strFromInt];
                         temp = [[NSMutableArray alloc] init];
-                        NSLog(@"%@", _daysAndAssignments);
+                        //NSLog(@"%@", _daysAndAssignments);
                     }
                     comparDate = [comparDate dateByAddingTimeInterval:60*60*24];
                     incr_count++;
