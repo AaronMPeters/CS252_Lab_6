@@ -9,7 +9,7 @@
 #import "WeekViewController.h"
 
 #define MAX_DAYS 21  // Maximum days in the calendar
-#define DAYS_IN_WEEK 7;
+#define DAYS_IN_WEEK 7
 
 @interface WeekViewController ()
 @property (weak, nonatomic) IBOutlet UICollectionView *calendarCollectionView;
@@ -18,6 +18,7 @@
 @end
 
 @implementation WeekViewController {
+    NSMutableDictionary *repeatingAssignments;
     NSMutableArray *array;
     int current_date;
     int todays_date;
@@ -45,6 +46,14 @@
     _ids = [[NSMutableArray alloc] init];
     _completeStatuses = [[NSMutableArray alloc] init];
     [self.assignmentTable reloadData];
+    
+    [self createOrAccessAssignmentsDatabase];
+    repeatingAssignments = [[NSMutableDictionary alloc] init];
+    for (int i = 0; i < DAYS_IN_WEEK; i++) {
+        NSString *strFromInt = [NSString stringWithFormat:@"%d",i];
+        [repeatingAssignments setObject:[self getRepeatingAssignmentsFromDatabaseWithDay:i] forKey:strFromInt];
+    }
+    
     [self getInformationFromServer];
     
 }
@@ -52,17 +61,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    /* How to use dicitonaries: 
-     
-    NSDictionary *dict = @{ @"alpha" : @[@"1", @"2", @"3"], @"beta" : @[@"one", @"two", @"three"] };
-    NSLog(@"%@", [[dict objectForKey:@"beta"] objectAtIndex:1]);
-    
-    NSMutableDictionary *mut = [[NSMutableDictionary alloc] init];
-    [mut setObject:@[@"1", @"2", @"3"] forKey:@"alpha"];
-    NSLog(@"%@", [[dict objectForKey:@"alpha"] objectAtIndex:1]);
-     
-     */
     
     array = [[NSMutableArray alloc] init];
     [array addObject:@"Su"];
@@ -72,16 +70,85 @@
     [array addObject:@"R"];
     [array addObject:@"F"];
     [array addObject:@"Sa"];
-    
-    
-    // Do any additional setup after loading the view.
 }
 
-- (void)didReceiveMemoryWarning
+# pragma SQLite3 Methods
+
+- (void)createOrAccessAssignmentsDatabase
 {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    NSString *docsDir;
+    NSArray *dirPaths;
+    
+    // Get the documents directory
+    dirPaths = NSSearchPathForDirectoriesInDomains(
+                                                   NSDocumentDirectory, NSUserDomainMask, YES);
+    
+    docsDir = dirPaths[0];
+    
+    // Build the path to the database file
+    _assignmentsDatabasePath = [[NSString alloc]
+                                initWithString: [docsDir stringByAppendingPathComponent:
+                                                 @"assignments.db"]];
+    
+    NSFileManager *filemgr = [NSFileManager defaultManager];
+    
+    if ([filemgr fileExistsAtPath: _assignmentsDatabasePath ] == NO)
+    {
+        const char *dbpath = [_assignmentsDatabasePath UTF8String];
+        
+        if (sqlite3_open(dbpath, &_assignmentsDB) == SQLITE_OK)
+        {
+            char *errMsg;
+            const char *sql_stmt =
+            "CREATE TABLE IF NOT EXISTS ASSIGNMENTS (ID INTEGER PRIMARY KEY AUTOINCREMENT, ASSIGNMENT TEXT, DAY INTEGER)";
+            
+            if (sqlite3_exec(_assignmentsDB, sql_stmt, NULL, NULL, &errMsg) != SQLITE_OK)
+                NSLog(@"%@", @"Failed to create table");
+            else
+                NSLog(@"%@", @"Successfully created table");
+            
+            sqlite3_close(_assignmentsDB);
+        } else
+            NSLog(@"%@", @"Failed to open/create database");
+    }
+    else
+        NSLog(@"%@", @"Table already exists. Status OK");
 }
+
+- (NSMutableArray*)getRepeatingAssignmentsFromDatabaseWithDay:(int)day
+{
+    NSMutableArray *temp = [[NSMutableArray alloc] init];
+    const char *dbpath = [_assignmentsDatabasePath UTF8String];
+    sqlite3_stmt    *statement;
+    
+    if (sqlite3_open(dbpath, &_assignmentsDB) == SQLITE_OK)
+    {
+        NSString *querySQL = [NSString stringWithFormat:
+                              @"SELECT assignment FROM assignments WHERE day=\"%d\"",
+                              day];
+        
+        const char *query_stmt = [querySQL UTF8String];
+        
+        if (sqlite3_prepare_v2(_assignmentsDB,
+                               query_stmt, -1, &statement, NULL) == SQLITE_OK)
+        {
+            while (sqlite3_step(statement) == SQLITE_ROW)
+            {
+                NSString *assignmentField = [[NSString alloc]
+                                             initWithUTF8String:(const char *)
+                                             sqlite3_column_text(statement, 0)];
+                //NSLog(@"Assignment Found with Name: %@", assignmentField);
+                [temp addObject:assignmentField];
+            }
+            sqlite3_finalize(statement);
+        }
+        sqlite3_close(_assignmentsDB);
+        //NSLog(@"%@", _daysAndAssignments);
+    }
+    return temp;
+}
+
+#pragma Parse methods
 
 - (void)getInformationFromServer
 {
@@ -116,23 +183,22 @@
                 PFObject *obj = [objects objectAtIndex:lcv];
                 if ([ViewTVC isSameDayWithToday:comparDate due:obj[@"due"]]){
                     [temp addObject:obj];
-                    //NSLog(@"%@", obj[@"assignment_name"]);
                     lcv++;
                 }
                 else {
+                    NSDateComponents* comp = [calendar components:unitFlags fromDate:comparDate];
+                    
                     if ([temp count] > 0){
-                        NSDateComponents* comp = [calendar components:unitFlags fromDate:comparDate];
-                        //NSLog(@"%ld", (long)[comp day]);
-                        
                         int day = (int)[comp day];
-/*                        day--;
+                        /*
+                        day--;
                         if (day == 0)
                             day = [ViewTVC getLastDayOfMonthWithMonth:_start_month andYear:_start_year];
-*/
+                         */
+                        
                         NSString *strFromInt = [NSString stringWithFormat:@"%d",day];
                         [_daysAndAssignments setObject:temp forKey:strFromInt];
                         temp = [[NSMutableArray alloc] init];
-                        //NSLog(@"%@", _daysAndAssignments);
                     }
                     comparDate = [comparDate dateByAddingTimeInterval:60*60*24];
                     incr_count++;
@@ -177,9 +243,13 @@
             current_date = _start_date;
         
         NSString *strFromInt = [NSString stringWithFormat:@"%d", current_date];
+        NSString *strFromInt1 = [NSString stringWithFormat:@"%d", indexPath.row];
+
         labelDate.text = strFromInt;
         NSArray *temp = [_daysAndAssignments objectForKey:strFromInt];
+        NSArray *repeating = [repeatingAssignments objectForKey:strFromInt1];
         int count = [temp count];
+        count += [repeating count];
         if (count > 0)
             [labelCount setTextColor:[UIColor redColor]];
         else
@@ -228,6 +298,13 @@
             [_completeStatuses addObject:assignment[@"complete"]];
         }
     }
+    NSString *strFromInt = [NSString stringWithFormat:@"%d",indexPath.row];
+    for (NSString * assignment in [repeatingAssignments objectForKey:strFromInt]) {
+        [_ids addObject:@"REPEATING"];
+        [_assignments addObject:assignment];
+        [_times addObject:[ViewTVC getTimeRepresentationWithDate:[NSDate date]]];
+        [_completeStatuses addObject:@NO];
+    }
     [self.assignmentTable reloadData];
 }
 
@@ -260,17 +337,25 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell_MonthView" forIndexPath:indexPath];
+    UITableViewCell *cell;
+    BOOL isRepeat = [[_ids objectAtIndex:indexPath.row] isEqualToString:@"REPEATING"];
+    if (isRepeat)
+        cell = [tableView dequeueReusableCellWithIdentifier:@"Cell_RepeatingView" forIndexPath:indexPath];
+    else
+        cell = [tableView dequeueReusableCellWithIdentifier:@"Cell_MonthView" forIndexPath:indexPath];
     
     if ([_assignments count]){
         cell.detailTextLabel.text = [_times objectAtIndex:indexPath.row];
         cell.textLabel.text = [_assignments objectAtIndex:indexPath.row];
-        NSNumber *num = [NSNumber numberWithBool:[[_completeStatuses objectAtIndex:indexPath.row] boolValue]];
-        int i = [num intValue];
-        if (i)
-            cell.accessoryType = UITableViewCellAccessoryCheckmark;
-        else
-            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        
+        if (!isRepeat){
+            NSNumber *num = [NSNumber numberWithBool:[[_completeStatuses objectAtIndex:indexPath.row] boolValue]];
+            int i = [num intValue];
+            if (i)
+                cell.accessoryType = UITableViewCellAccessoryCheckmark;
+            else
+                cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        }
     }
 
     return cell;
@@ -289,10 +374,11 @@
 {
     NSString * segueIdentifier = [segue identifier];
     NSIndexPath *indexPath = [self.assignmentTable indexPathForCell:sender];
-    if([segueIdentifier isEqualToString:@"MonthAssignmentSegue"]){
+    NSString * objectID = [_ids objectAtIndex:indexPath.row];
+    if([segueIdentifier isEqualToString:@"MonthAssignmentSegue"] && ![objectID isEqualToString:@"REPEATING"]){
         [[self navigationController] setNavigationBarHidden:NO animated:YES];
         AssignmentDetailViewController *detailController = (AssignmentDetailViewController *)[segue destinationViewController];
-            detailController.objectId = [_ids objectAtIndex:indexPath.row];
+        detailController.objectId = objectID;
     }
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.

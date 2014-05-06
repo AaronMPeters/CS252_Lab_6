@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <Parse/Parse.h>
+#import <sqlite3.h>
 #include "ViewTVC.h"
 
 @interface WeekViewController : UIViewController <UICollectionViewDelegate, UICollectionViewDataSource, UITableViewDelegate, UITableViewDataSource>
@@ -20,5 +21,8 @@
 @property (nonatomic) int start_date;
 @property (nonatomic) int start_month;
 @property (nonatomic) int start_year;
+
+@property (strong, nonatomic) NSString *assignmentsDatabasePath;
+@property (nonatomic) sqlite3 *assignmentsDB;
 
 @end
