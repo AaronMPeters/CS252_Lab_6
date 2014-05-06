@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <Parse/Parse.h>
+#import <sqlite3.h>
 #include "AssignmentDetailViewController.h"
 
 @interface ViewTVC : UITableViewController
@@ -21,6 +22,9 @@
 @property (strong, nonatomic) NSMutableArray *timesTmrw;
 @property (strong, nonatomic) NSMutableArray *completeStatusesTmrw;
 @property (strong, nonatomic) NSMutableArray *ids_tmrw;
+
+@property (strong, nonatomic) NSString *assignmentsDatabasePath;
+@property (nonatomic) sqlite3 *assignmentsDB;
 
 + (BOOL)isSameDayWithToday:(NSDate*)date1 due:(NSDate*)date2;
 + (BOOL)isLastDayofMonthWithDate:(NSDate*)date;
